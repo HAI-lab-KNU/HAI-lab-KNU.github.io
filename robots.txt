@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hailab.kangwon.ac.kr/sitemap.xml
