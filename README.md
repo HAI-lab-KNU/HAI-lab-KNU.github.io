@@ -1,6 +1,7 @@
 # HAI Lab Website
 
 Human-AI Interaction Lab's official website.
+https://hai.kangwon.ac.kr/
 
 ## 📝 Content Update Guide
 
