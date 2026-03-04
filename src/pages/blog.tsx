@@ -49,12 +49,12 @@ const BlogPage: React.FC<PageProps<DataProps>> = ({ data }) => {
     return filteredTags.sort()
   }, [posts])
 
-  // 선택된 태그에 따라 프로젝트 필터링 (AND 로직)
+  // 선택된 태그에 따라 프로젝트 필터링 (OR 로직)
   const filteredPosts = React.useMemo(() => {
     if (selectedTags.length === 0) return posts
     return posts.filter(post => 
       post.frontmatter.tags && 
-      selectedTags.every(tag => post.frontmatter.tags!.includes(tag))
+      selectedTags.some(tag => post.frontmatter.tags!.includes(tag))
     )
   }, [posts, selectedTags])
 
