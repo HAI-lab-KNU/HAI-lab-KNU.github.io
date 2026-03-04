@@ -4,7 +4,7 @@ import { FaCheck } from "react-icons/fa";
 interface YearFilterProps {
   startYear: string;
   endYear: string;
-  selectedType: string;
+  selectedTypes: string[];
   onStartYearChange: (year: string) => void;
   onEndYearChange: (year: string) => void;
   onTypeChange: (type: string) => void;
@@ -16,7 +16,7 @@ interface YearFilterProps {
 const YearFilter: React.FC<YearFilterProps> = ({
   startYear,
   endYear,
-  selectedType,
+  selectedTypes,
   onStartYearChange,
   onEndYearChange,
   onTypeChange,
@@ -37,12 +37,12 @@ const YearFilter: React.FC<YearFilterProps> = ({
                   key={type}
                   onClick={() => onTypeChange(type)}
                   className={`px-1 py-0.5 rounded-md font-normal transition-all duration-300 text-xs whitespace-nowrap flex items-center gap-0.5 ${
-                    selectedType === type
+                    selectedTypes.includes(type)
                       ? "bg-white text-blue-600 border border-blue-400"
                       : "bg-white text-gray-600 border border-gray-300 hover:bg-white hover:text-blue-600 hover:border-blue-300"
                   }`}
                 >
-                  {selectedType === type && (
+                  {selectedTypes.includes(type) && (
                     <FaCheck className="w-2 h-2" />
                   )}
                   {type}

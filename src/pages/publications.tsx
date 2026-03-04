@@ -34,7 +34,7 @@ const PublicationsPage: React.FC<PageProps<DataProps>> = ({ data }) => {
   const publications = data.allMarkdownRemark.nodes
   const [startYear, setStartYear] = React.useState<string>("")
   const [endYear, setEndYear] = React.useState<string>("")
-  const [selectedType, setSelectedType] = React.useState<string>("All")
+  const [selectedTypes, setSelectedTypes] = React.useState<string[]>([])
 
   // 사용 가능한 연도 목록 생성 (최신순)
   const availableYears = React.useMemo(() => {
@@ -44,9 +44,18 @@ const PublicationsPage: React.FC<PageProps<DataProps>> = ({ data }) => {
 
   // 사용 가능한 타입 목록 생성
   const availableTypes = React.useMemo(() => {
-    const types = ["All", "Journal", "Conference", "Poster"]
+    const types = ["Journal", "Conference", "Poster"]
     return types
   }, [publications])
+
+  // 타입 선택/해제 핸들러
+  const handleTypeToggle = (type: string) => {
+    setSelectedTypes(prev => 
+      prev.includes(type) 
+        ? prev.filter(t => t !== type)
+        : [...prev, type]
+    )
+  }
 
   // 필터링된 논문 목록
   const filteredPublications = React.useMemo(() => {
@@ -54,10 +63,10 @@ const PublicationsPage: React.FC<PageProps<DataProps>> = ({ data }) => {
       const year = parseInt(pub.frontmatter.year)
       const start = startYear ? parseInt(startYear) : 0
       const end = endYear ? parseInt(endYear) : 9999
-      const typeMatch = selectedType === "All" || pub.frontmatter.type === selectedType
+      const typeMatch = selectedTypes.length === 0 || selectedTypes.includes(pub.frontmatter.type)
       return year >= start && year <= end && typeMatch
     })
-  }, [publications, startYear, endYear, selectedType])
+  }, [publications, startYear, endYear, selectedTypes])
 
   // 연도별로 그룹화하고 최신순으로 정렬
   const groupedPublications = React.useMemo(() => {
@@ -82,10 +91,10 @@ const PublicationsPage: React.FC<PageProps<DataProps>> = ({ data }) => {
         <YearFilter
           startYear={startYear}
           endYear={endYear}
-          selectedType={selectedType}
+          selectedTypes={selectedTypes}
           onStartYearChange={setStartYear}
           onEndYearChange={setEndYear}
-          onTypeChange={setSelectedType}
+          onTypeChange={handleTypeToggle}
           availableYears={availableYears}
           availableTypes={availableTypes}
         />

@@ -23,12 +23,12 @@ type DataProps = {
 
 const LecturesPage: React.FC<PageProps<DataProps>> = ({ data }) => {
   const lectures = data.allMarkdownRemark.nodes
-  const [selectedType, setSelectedType] = React.useState("All")
+  const [selectedTypes, setSelectedTypes] = React.useState<string[]>([])
   const [startYear, setStartYear] = React.useState("")
   const [endYear, setEndYear] = React.useState("")
 
   // 사용 가능한 타입들
-  const availableTypes = ["All", "Major", "Liberal Arts"]
+  const availableTypes = ["Major", "Liberal Arts"]
 
   // 사용 가능한 연도들 (2020-2025)
   const availableYears = Array.from({ length: 6 }, (_, i) => (2025 - i).toString())
@@ -38,12 +38,21 @@ const LecturesPage: React.FC<PageProps<DataProps>> = ({ data }) => {
     return major ? "Major" : "Liberal Arts"
   }
 
+  // 타입 선택/해제 핸들러
+  const handleTypeToggle = (type: string) => {
+    setSelectedTypes(prev => 
+      prev.includes(type) 
+        ? prev.filter(t => t !== type)
+        : [...prev, type]
+    )
+  }
+
   // 필터링된 강의들
   const filteredLectures = lectures.filter((lecture) => {
     const lectureType = getTypeFromMajor(lecture.frontmatter.major)
     const lectureYear = new Date(lecture.frontmatter.date).getFullYear().toString()
     
-    const typeMatch = selectedType === "All" || lectureType === selectedType
+    const typeMatch = selectedTypes.length === 0 || selectedTypes.includes(lectureType)
     const yearMatch = (!startYear || lectureYear >= startYear) && (!endYear || lectureYear <= endYear)
     
     return typeMatch && yearMatch
@@ -66,8 +75,8 @@ const LecturesPage: React.FC<PageProps<DataProps>> = ({ data }) => {
           endYear={endYear}
           onStartYearChange={setStartYear}
           onEndYearChange={setEndYear}
-          selectedType={selectedType}
-          onTypeChange={setSelectedType}
+          selectedTypes={selectedTypes}
+          onTypeChange={handleTypeToggle}
           availableTypes={availableTypes}
           availableYears={availableYears}
           typeLabel="Lecture Type"
