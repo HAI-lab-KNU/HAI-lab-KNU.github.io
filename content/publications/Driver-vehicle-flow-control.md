@@ -9,6 +9,7 @@ doi: ""
 paper: "/paper/ICTC20_FlowControl.pdf"
 slide: ""
 video: ""
+abbrev: "ICTC"
 ---
 
 # Towards Flow Control of Driver-Vehicle Interactions

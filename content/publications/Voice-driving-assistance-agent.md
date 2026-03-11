@@ -10,6 +10,7 @@ doi: "https://www.dbpia.co.kr/Journal/articleDetail?nodeId=NODE11043828"
 paper: "/paper/HCIK22_intelligentVehicleAgent.pdf"
 slide: ""
 video: ""
+abbrev: "HCIK"
 ---
 
 # A Survey on Design for Development of Voice Driving Assistance Agent

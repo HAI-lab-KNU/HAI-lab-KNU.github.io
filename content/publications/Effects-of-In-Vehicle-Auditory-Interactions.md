@@ -12,4 +12,5 @@ abstract: |
   In SAE Level 2 semi-automated driving environments, auditory secondary tasks—though not visually or manually distracting—can reduce takeover performance. This study examined how different levels of auditory task difficulty impact driver reaction during takeover events. Using a driving simulator and physiological monitoring of 50 participants, the research found that auditory tasks significantly influenced takeover quality. Moreover, physiological signals such as pupil diameter, eye movement dispersion, and inter-beat interval were associated with takeover performance. The findings suggest potential for real-time systems to estimate cognitive load and manage interruptions more intelligently.
 paper: "/paper/IJHCS_smartCar.pdf"
 slide: ""
+abbrev: "IJHCS"
 ---

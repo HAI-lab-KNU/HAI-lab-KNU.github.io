@@ -9,6 +9,7 @@ doi: "10.1145/3491102.3501944"
 paper: "/paper/CHI22_ESM.pdf"
 slide: ""
 video: "https://www.youtube.com/watch?v=CCw1uEOuhZM"
+abbrev: "CHI"
 tags: ["Top Conference"]
 ---
 

@@ -10,6 +10,7 @@ doi: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11043827"
 paper: "/paper/HCIK22_simulater.pdf"
 slide: ""
 video: ""
+abbrev: "HCIK"
 ---
 
 # Developing and Evaluating Low-Cost Level 3 Vehicle Simulator

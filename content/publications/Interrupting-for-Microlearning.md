@@ -14,5 +14,6 @@ abstract: |
 paper: "/paper/CHI24Microlearning.pdf"
 slide: ""
 video: "https://www.youtube.com/watch?v=JBZ-uJym3hg"
+abbrev: "CHI"
 tags: ["Top Conference"]
 ---

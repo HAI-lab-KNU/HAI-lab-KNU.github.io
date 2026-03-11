@@ -9,6 +9,7 @@ doi: "10.3390/electronics12081906"
 paper: "/paper/electronics23_ZeroTrust.pdf"
 slide: ""
 video: ""
+abbrev: "Electronics"
 ---
 
 # Endpoint Device Risk-Scoring Algorithm Proposal for Zero Trust

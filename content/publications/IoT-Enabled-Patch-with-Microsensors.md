@@ -13,4 +13,5 @@ abstract: |
   This study developed and evaluated an IoT-enabled patch with built-in microsensors and a wireless chip to enable real-time, remote monitoring of adherence during patch treatment for amblyopia. The patch uses dual temperature sensors to detect wear status and transmits data to a cloud server every 15 seconds via a mobile application. The system was validated in two experiments with 30 adults and 40 children, showing high accuracy and usability. The results demonstrate that this technology can support clinicians in monitoring treatment adherence objectively and adjusting plans in real-time.
 paper: "/paper/TVST2024.pdf"
 slide: ""
+abbrev: "TVST"
 ---
