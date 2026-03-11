@@ -24,6 +24,19 @@ const YearFilter: React.FC<YearFilterProps> = ({
   availableTypes,
   typeLabel = "Publication Type"
 }) => {
+  // Start에는 endYear 이하만, End에는 startYear 이상만 표시 (Start > End 선택 불가)
+  const startYearOptions = React.useMemo(() => {
+    if (!endYear) return availableYears
+    const end = parseInt(endYear, 10)
+    return availableYears.filter(y => parseInt(y, 10) <= end)
+  }, [availableYears, endYear])
+
+  const endYearOptions = React.useMemo(() => {
+    if (!startYear) return availableYears
+    const start = parseInt(startYear, 10)
+    return availableYears.filter(y => parseInt(y, 10) >= start)
+  }, [availableYears, startYear])
+
   return (
     <div className="mb-2 md:mb-6">
       <div className="bg-gray-50 rounded-lg p-1.5 md:p-4">
@@ -62,8 +75,8 @@ const YearFilter: React.FC<YearFilterProps> = ({
                   onChange={(e) => onStartYearChange(e.target.value)}
                   className="px-1 py-0.5 bg-white border border-gray-300 rounded-md text-xs font-normal text-gray-600 focus:outline-none focus:border-blue-400 hover:border-blue-300 transition-all duration-300 min-w-[70px] md:min-w-[100px]"
                 >
-                  <option value="">All</option>
-                  {availableYears.map((year) => (
+                  <option value="">Today</option>
+                  {startYearOptions.map((year) => (
                     <option key={year} value={year}>
                       {year}
                     </option>
@@ -81,8 +94,8 @@ const YearFilter: React.FC<YearFilterProps> = ({
                   onChange={(e) => onEndYearChange(e.target.value)}
                   className="px-1 py-0.5 bg-white border border-gray-300 rounded-md text-xs font-normal text-gray-600 focus:outline-none focus:border-blue-400 hover:border-blue-300 transition-all duration-300 min-w-[70px] md:min-w-[100px]"
                 >
-                  <option value="">All</option>
-                  {availableYears.map((year) => (
+                  <option value="">Today</option>
+                  {endYearOptions.map((year) => (
                     <option key={year} value={year}>
                       {year}
                     </option>

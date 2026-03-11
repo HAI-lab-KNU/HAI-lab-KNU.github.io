@@ -57,12 +57,26 @@ const PublicationsPage: React.FC<PageProps<DataProps>> = ({ data }) => {
     )
   }
 
+  // 연도 변경 시 Start > End 되지 않도록 반대쪽 자동 보정
+  const handleStartYearChange = (year: string) => {
+    setStartYear(year)
+    if (year && endYear && parseInt(year, 10) > parseInt(endYear, 10)) {
+      setEndYear(year)
+    }
+  }
+  const handleEndYearChange = (year: string) => {
+    setEndYear(year)
+    if (year && startYear && parseInt(year, 10) < parseInt(startYear, 10)) {
+      setStartYear(year)
+    }
+  }
+
   // 필터링된 논문 목록
   const filteredPublications = React.useMemo(() => {
     return publications.filter(pub => {
       const year = parseInt(pub.frontmatter.year)
-      const start = startYear ? parseInt(startYear) : 0
-      const end = endYear ? parseInt(endYear) : 9999
+      const start = startYear ? parseInt(startYear, 10) : 0
+      const end = endYear ? parseInt(endYear, 10) : 9999
       const typeMatch = selectedTypes.length === 0 || selectedTypes.includes(pub.frontmatter.type)
       return year >= start && year <= end && typeMatch
     })
@@ -92,8 +106,8 @@ const PublicationsPage: React.FC<PageProps<DataProps>> = ({ data }) => {
           startYear={startYear}
           endYear={endYear}
           selectedTypes={selectedTypes}
-          onStartYearChange={setStartYear}
-          onEndYearChange={setEndYear}
+          onStartYearChange={handleStartYearChange}
+          onEndYearChange={handleEndYearChange}
           onTypeChange={handleTypeToggle}
           availableYears={availableYears}
           availableTypes={availableTypes}

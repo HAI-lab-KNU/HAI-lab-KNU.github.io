@@ -47,14 +47,31 @@ const LecturesPage: React.FC<PageProps<DataProps>> = ({ data }) => {
     )
   }
 
+  // 연도 변경 시 Start > End 되지 않도록 반대쪽 자동 보정
+  const handleStartYearChange = (year: string) => {
+    setStartYear(year)
+    if (year && endYear && parseInt(year, 10) > parseInt(endYear, 10)) {
+      setEndYear(year)
+    }
+  }
+  const handleEndYearChange = (year: string) => {
+    setEndYear(year)
+    if (year && startYear && parseInt(year, 10) < parseInt(startYear, 10)) {
+      setStartYear(year)
+    }
+  }
+
   // 필터링된 강의들
   const filteredLectures = lectures.filter((lecture) => {
     const lectureType = getTypeFromMajor(lecture.frontmatter.major)
-    const lectureYear = new Date(lecture.frontmatter.date).getFullYear().toString()
-    
+    const yearNum = new Date(lecture.frontmatter.date).getFullYear()
+    if (Number.isNaN(yearNum)) return false
+
     const typeMatch = selectedTypes.length === 0 || selectedTypes.includes(lectureType)
-    const yearMatch = (!startYear || lectureYear >= startYear) && (!endYear || lectureYear <= endYear)
-    
+    const startNum = startYear ? parseInt(startYear, 10) : 0
+    const endNum = endYear ? parseInt(endYear, 10) : 9999
+    const yearMatch = yearNum >= startNum && yearNum <= endNum
+
     return typeMatch && yearMatch
   })
 
@@ -73,8 +90,8 @@ const LecturesPage: React.FC<PageProps<DataProps>> = ({ data }) => {
         <YearFilter
           startYear={startYear}
           endYear={endYear}
-          onStartYearChange={setStartYear}
-          onEndYearChange={setEndYear}
+          onStartYearChange={handleStartYearChange}
+          onEndYearChange={handleEndYearChange}
           selectedTypes={selectedTypes}
           onTypeChange={handleTypeToggle}
           availableTypes={availableTypes}
