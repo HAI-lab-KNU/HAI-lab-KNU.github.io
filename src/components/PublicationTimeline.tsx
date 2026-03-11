@@ -1,6 +1,7 @@
 import * as React from "react"
 import { createPortal } from "react-dom"
 import { Link } from "gatsby"
+import { motion, AnimatePresence } from "framer-motion"
 
 export type PublicationNode = {
   id: string
@@ -18,6 +19,8 @@ export type PublicationNode = {
 
 type PublicationTimelineProps = {
   publications: PublicationNode[]
+  /** 연도 축을 고정할 때 사용. 없으면 publications에서 연도 추출 */
+  yearOrder?: string[]
 }
 
 const TYPE_COLORS: Record<string, { bg: string; label: string }> = {
@@ -38,13 +41,22 @@ function getDisplayLabel(pub: PublicationNode): string {
   return getShortLabel(pub.frontmatter.journal)
 }
 
-const PublicationTimeline: React.FC<PublicationTimelineProps> = ({ publications }) => {
+const PublicationTimeline: React.FC<PublicationTimelineProps> = ({ publications, yearOrder: yearOrderProp }) => {
   const [hoveredPub, setHoveredPub] = React.useState<PublicationNode | null>(null)
   const [hoveredEl, setHoveredEl] = React.useState<HTMLElement | null>(null)
   const [triggerRect, setTriggerRect] = React.useState<DOMRect | null>(null)
   const scrollRef = React.useRef<HTMLDivElement>(null)
   const [showScrollHint, setShowScrollHint] = React.useState(false)
   const hasScrolledToEndRef = React.useRef(false)
+  const prevPublicationsRef = React.useRef(publications)
+  const preserveScrollRef = React.useRef<number | null>(null)
+  const lastScrollRatioRef = React.useRef<number>(0)
+
+  // 필터(publications) 변경 시 스크롤 비율 보존: 렌더 시점에 복원용으로 저장 (effect보다 ResizeObserver가 먼저 돌 수 있음)
+  if (prevPublicationsRef.current !== publications) {
+    preserveScrollRef.current = lastScrollRatioRef.current
+    prevPublicationsRef.current = publications
+  }
 
   React.useEffect(() => {
     if (!hoveredEl) {
@@ -65,8 +77,24 @@ const PublicationTimeline: React.FC<PublicationTimelineProps> = ({ publications 
     const el = scrollRef.current
     if (!el) return
     const canScroll = el.scrollWidth > el.clientWidth
+    const maxScroll = el.scrollWidth - el.clientWidth
     const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 8
     setShowScrollHint(canScroll && atEnd)
+
+    // 평소에 스크롤 비율 기록 (필터 변경 시 복원용)
+    if (maxScroll > 0) {
+      lastScrollRatioRef.current = el.scrollLeft / maxScroll
+    }
+
+    // 필터 변경으로 콘텐츠가 줄어든 뒤 스크롤이 막 오른쪽으로 밀리는 것 방지: 저장해 둔 비율 복원
+    if (preserveScrollRef.current !== null) {
+      if (maxScroll > 0) {
+        el.scrollLeft = Math.round(preserveScrollRef.current * maxScroll)
+      }
+      preserveScrollRef.current = null
+      return
+    }
+
     if (canScroll && !hasScrolledToEndRef.current) {
       hasScrolledToEndRef.current = true
       el.scrollLeft = el.scrollWidth
@@ -96,9 +124,11 @@ const PublicationTimeline: React.FC<PublicationTimelineProps> = ({ publications 
       if (!byYear[y]) byYear[y] = []
       byYear[y].push(pub)
     })
-    const yearOrder = Object.keys(byYear).sort((a, b) => parseInt(a, 10) - parseInt(b, 10))
-    return { yearOrder, byYear }
-  }, [publications])
+    const order = yearOrderProp?.length
+      ? yearOrderProp
+      : Object.keys(byYear).sort((a, b) => parseInt(a, 10) - parseInt(b, 10))
+    return { yearOrder: order, byYear }
+  }, [publications, yearOrderProp])
 
   if (yearOrder.length === 0) return null
 
@@ -127,98 +157,147 @@ const PublicationTimeline: React.FC<PublicationTimelineProps> = ({ publications 
               gridTemplateRows: "auto 1px auto",
             }}
           >
+          <AnimatePresence mode="popLayout">
           {yearOrder.map((year) => {
-            const items = byYear[year]
+            const items = byYear[year] ?? []
             return (
-              <React.Fragment key={year}>
-                {/* 블록 영역: 행마다 링크(사각형+라벨) + 호버 카드 */}
-                <div className="flex flex-col justify-end gap-1.5">
-                  {items.map((pub) => {
-                    const typeStyle = TYPE_COLORS[pub.frontmatter.type] ?? TYPE_COLORS.Conference
-                    const short = getDisplayLabel(pub)
-                    const content = (
-                      <>
-                        <div className="min-w-0" aria-hidden />
-                        <div className="min-h-[1rem] flex items-center justify-center">
-                          <span
-                            className={`w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-sm flex-shrink-0 ${typeStyle.bg}`}
-                            aria-hidden
-                          />
-                        </div>
-                        <div className="min-h-[1rem] flex items-center min-w-0 pl-1">
-                          <span
-                            className="text-xs text-gray-700 truncate max-w-[56px] sm:max-w-[80px] md:max-w-[120px] leading-4 group-hover:text-blue-600"
-                            aria-label={`${pub.frontmatter.title} (${pub.frontmatter.journal})`}
-                          >
-                            {short}
-                          </span>
-                        </div>
-                      </>
-                    )
-                    const cellClass =
-                      "grid grid-cols-[1fr_1.5rem_1fr] sm:grid-cols-[1fr_2rem_1fr] grid-rows-1 min-h-0 items-end gap-0 group relative " +
-                      (pub.frontmatter.paper || pub.frontmatter.doi || pub.fields?.slug ? "cursor-pointer" : "")
+              <motion.div
+                key={year}
+                layout
+                exit={{
+                  opacity: 0,
+                  y: 48,
+                  transition: { duration: 0.5, ease: "easeOut" },
+                }}
+                transition={{
+                  layout: { type: "spring", mass: 0.7, damping: 14, stiffness: 160 },
+                }}
+                style={{ minWidth: 0 }}
+              >
+                {/* 블록 영역: layout + spring, staggerChildren, hover 살짝 확대, filter 시 촤르륵 drop.
+                    고정 높이를 둬서 블록들이 항상 연도 숫자 위(바닥)에서부터 위로 쌓이도록 함 */}
+                <motion.div
+                  className="flex flex-col justify-end gap-1.5 h-24 sm:h-28 md:h-32"
+                  layout
+                  variants={{
+                    hidden: {},
+                    visible: {
+                      transition: { staggerChildren: 0.09, delayChildren: 0.03 },
+                    },
+                  }}
+                  initial="hidden"
+                  animate="visible"
+                  transition={{
+                    layout: { type: "spring", mass: 0.7, damping: 14, stiffness: 160 },
+                  }}
+                >
+                  <AnimatePresence mode="popLayout">
+                    {[...items].reverse().map((pub) => {
+                      const typeStyle = TYPE_COLORS[pub.frontmatter.type] ?? TYPE_COLORS.Conference
+                      const short = getDisplayLabel(pub)
+                      const content = (
+                        <>
+                          <div className="min-w-0" aria-hidden />
+                          <div className="min-h-[1rem] flex items-center justify-center">
+                            <span
+                              className={`w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-sm flex-shrink-0 ${typeStyle.bg}`}
+                              aria-hidden
+                            />
+                          </div>
+                          <div className="min-h-[1rem] flex items-center min-w-0 pl-1">
+                            <span
+                              className="text-xs text-gray-700 truncate max-w-[56px] sm:max-w-[80px] md:max-w-[120px] leading-4 group-hover:text-blue-600"
+                              aria-label={`${pub.frontmatter.title} (${pub.frontmatter.journal})`}
+                            >
+                              {short}
+                            </span>
+                          </div>
+                        </>
+                      )
+                      const cellClass =
+                        "grid grid-cols-[1fr_1.5rem_1fr] sm:grid-cols-[1fr_2rem_1fr] grid-rows-1 min-h-0 items-end gap-0 group relative " +
+                        (pub.frontmatter.paper || pub.frontmatter.doi || pub.fields?.slug ? "cursor-pointer" : "")
 
-                    const mouseProps = {
-                      onMouseEnter: (e: React.MouseEvent<HTMLElement>) => {
-                        setHoveredEl(e.currentTarget)
-                        setHoveredPub(pub)
-                      },
-                      onMouseLeave: () => {
-                        setHoveredEl(null)
-                        setHoveredPub(null)
-                      },
-                    }
+                      const mouseProps = {
+                        onMouseEnter: (e: React.MouseEvent<HTMLElement>) => {
+                          setHoveredEl(e.currentTarget)
+                          setHoveredPub(pub)
+                        },
+                        onMouseLeave: () => {
+                          setHoveredEl(null)
+                          setHoveredPub(null)
+                        },
+                      }
 
-                    // PDF 버튼과 동일: paper/doi는 <a target="_blank">, 상세 페이지만 <Link>
-                    if (pub.frontmatter.paper) {
+                      const blockContent = (
+                        <>
+                          {pub.frontmatter.paper ? (
+                            <a
+                              href={pub.frontmatter.paper}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={cellClass}
+                              {...mouseProps}
+                            >
+                              {content}
+                            </a>
+                          ) : pub.frontmatter.doi ? (
+                            <a
+                              href={pub.frontmatter.doi.startsWith("http") ? pub.frontmatter.doi : `https://doi.org/${pub.frontmatter.doi}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={cellClass}
+                              {...mouseProps}
+                            >
+                              {content}
+                            </a>
+                          ) : pub.fields?.slug ? (
+                            <Link to={pub.fields.slug} className={cellClass} {...mouseProps}>
+                              {content}
+                            </Link>
+                          ) : (
+                            <div className={cellClass} {...mouseProps}>
+                              {content}
+                            </div>
+                          )}
+                        </>
+                      )
+
                       return (
-                        <a
+                        <motion.div
                           key={pub.id}
-                          href={pub.frontmatter.paper}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={cellClass}
-                          {...mouseProps}
+                          layout
+                          variants={{
+                            hidden: { opacity: 0, y: -80 },
+                            visible: {
+                              opacity: 1,
+                              y: [-80, 10, -5, 0],
+                              transition: { duration: 0.6, ease: "easeOut" },
+                            },
+                            exit: {
+                              opacity: 0,
+                              y: 48,
+                              transition: { duration: 0.5, ease: "easeOut" },
+                            },
+                          }}
+                          initial="hidden"
+                          animate="visible"
+                          exit="exit"
+                          whileHover={{ scale: 1.06 }}
+                          transition={{
+                            layout: { type: "spring", mass: 0.7, damping: 14, stiffness: 160 },
+                          }}
                         >
-                          {content}
-                        </a>
+                          {blockContent}
+                        </motion.div>
                       )
-                    }
-                    if (pub.frontmatter.doi) {
-                      const doiUrl = pub.frontmatter.doi.startsWith("http")
-                        ? pub.frontmatter.doi
-                        : `https://doi.org/${pub.frontmatter.doi}`
-                      return (
-                        <a
-                          key={pub.id}
-                          href={doiUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={cellClass}
-                          {...mouseProps}
-                        >
-                          {content}
-                        </a>
-                      )
-                    }
-                    if (pub.fields?.slug) {
-                      return (
-                        <Link key={pub.id} to={pub.fields.slug} className={cellClass} {...mouseProps}>
-                          {content}
-                        </Link>
-                      )
-                    }
-                    return (
-                      <div key={pub.id} className={cellClass} {...mouseProps}>
-                        {content}
-                      </div>
-                    )
-                  })}
-                </div>
-              </React.Fragment>
+                    })}
+                  </AnimatePresence>
+                </motion.div>
+              </motion.div>
             )
           })}
+          </AnimatePresence>
           {/* 가로선: 모든 연도 축 바로 위 한 줄 */}
           <div
             className="col-span-full h-px"
@@ -228,7 +307,7 @@ const PublicationTimeline: React.FC<PublicationTimelineProps> = ({ publications 
             aria-hidden
           />
           {yearOrder.map((year) => {
-            const items = byYear[year]
+            const items = byYear[year] ?? []
             return (
               <div key={year} className="flex flex-col items-center pt-1">
                 <span className="w-px h-3 bg-gray-300 flex-shrink-0" aria-hidden />

@@ -17,6 +17,7 @@
     "date-fns": "^4.1.0",
     "flowbite": "^3.1.2",
     "flowbite-react": "^0.12.4",
+    "framer-motion": "^12.35.2",
     "gatsby": "^5.14.1",
     "gatsby-plugin-decap-cms": "^4.0.4",
     "gatsby-plugin-feed": "^5.14.0",
