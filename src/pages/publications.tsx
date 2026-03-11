@@ -1,5 +1,6 @@
 import * as React from "react"
 import { graphql, PageProps, Link } from "gatsby"
+import { motion, AnimatePresence } from "framer-motion"
 import Layout from "../components/layout"
 import YearFilter from "../components/YearFilter"
 import PublicationTimeline from "../components/PublicationTimeline"
@@ -41,7 +42,7 @@ const PublicationsPage: React.FC<PageProps<DataProps>> = ({ data }) => {
     return years[0]
   })
   const [endYear, setEndYear] = React.useState<string>("")
-  const [selectedTypes, setSelectedTypes] = React.useState<string[]>([])
+  const [selectedTypes, setSelectedTypes] = React.useState<string[]>(["Journal", "Conference", "Poster"])
 
   // 사용 가능한 연도 목록 생성 (최신순, 유효한 연도만)
   const availableYears = React.useMemo(() => {
@@ -78,13 +79,26 @@ const PublicationsPage: React.FC<PageProps<DataProps>> = ({ data }) => {
     }
   }
 
+  // 타임라인용: 연도 필터(Start/End)만 적용한 연도 목록 → 타임라인은 항상 전체 연도 축 유지, 블록만 타입 필터 반영
+  const timelineYearOrder = React.useMemo(() => {
+    const years = [...new Set(publications.map(p => p.frontmatter.year).filter((y): y is string => y != null && y !== ""))]
+    const start = startYear ? parseInt(startYear, 10) : 0
+    const end = endYear ? parseInt(endYear, 10) : 9999
+    return years
+      .filter(y => {
+        const n = parseInt(y, 10)
+        return !Number.isNaN(n) && n >= start && n <= end
+      })
+      .sort((a, b) => parseInt(a, 10) - parseInt(b, 10))
+  }, [publications, startYear, endYear])
+
   // 필터링된 논문 목록
   const filteredPublications = React.useMemo(() => {
     return publications.filter(pub => {
       const year = parseInt(pub.frontmatter.year)
       const start = startYear ? parseInt(startYear, 10) : 0
       const end = endYear ? parseInt(endYear, 10) : 9999
-      const typeMatch = selectedTypes.length === 0 || selectedTypes.includes(pub.frontmatter.type)
+      const typeMatch = selectedTypes.length > 0 && selectedTypes.includes(pub.frontmatter.type)
       return year >= start && year <= end && typeMatch
     })
   }, [publications, startYear, endYear, selectedTypes])
@@ -108,10 +122,24 @@ const PublicationsPage: React.FC<PageProps<DataProps>> = ({ data }) => {
     <Layout activeLink="Publications">
       <div className="max-w-7xl mx-auto px-3 md:px-8 py-6 md:py-8">
         <div className="space-y-8">
-        {/* 연도·유형별 시각화 (필터 위) */}
-        <PublicationTimeline publications={publications} />
+        {/* 연도·유형별 시각화. 타입을 하나도 선택 안 하면 타임라인 천천히 페이드아웃 후 비표시 */}
+        <AnimatePresence mode="wait">
+          {filteredPublications.length > 0 && (
+            <motion.div
+              key="timeline"
+              initial={{ opacity: 1 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0, transition: { duration: 0.45, ease: "easeOut" } }}
+            >
+              <PublicationTimeline
+                publications={filteredPublications}
+                yearOrder={timelineYearOrder}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-        {/* 연도 필터 */}
+        {/* 연도 필터: 타임라인 아래 */}
         <YearFilter
           startYear={startYear}
           endYear={endYear}
