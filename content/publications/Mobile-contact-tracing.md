@@ -9,6 +9,7 @@ doi: "10.3389/fpubh.2021.586615"
 paper: "/paper/frontiers21_covid19.pdf"
 slide: ""
 video: ""
+abbrev: "Frontiers"
 ---
 
 # Benefits of Mobile Contact Tracing on COVID-19: Tracing Capacity Perspectives

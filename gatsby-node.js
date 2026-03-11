@@ -124,7 +124,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       paper: String
       slide: String
       video: String
-      thumbnail: String
+      abbrev: String
       image1: String
       image2: String
       image3: String

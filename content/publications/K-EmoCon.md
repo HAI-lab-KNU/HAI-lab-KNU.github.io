@@ -9,6 +9,7 @@ doi: "10.1038/s41597-020-00630-y"
 paper: "/paper/scientific20_K_Emocon.pdf"
 slide: ""
 video: ""
+abbrev: "Sci. Data"
 ---
 
 # K-EmoCon, a Multimodal Sensor Dataset for Continuous Emotion Recognition in Naturalistic Conversations

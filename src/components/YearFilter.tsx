@@ -75,7 +75,6 @@ const YearFilter: React.FC<YearFilterProps> = ({
                   onChange={(e) => onStartYearChange(e.target.value)}
                   className="px-1 py-0.5 bg-white border border-gray-300 rounded-md text-xs font-normal text-gray-600 focus:outline-none focus:border-blue-400 hover:border-blue-300 transition-all duration-300 min-w-[70px] md:min-w-[100px]"
                 >
-                  <option value="">Today</option>
                   {startYearOptions.map((year) => (
                     <option key={year} value={year}>
                       {year}

@@ -9,6 +9,7 @@ doi: "10.1038/s41597-023-02248-2"
 paper: "/paper/scientfic23KEmoPhone.pdf"
 slide: ""
 video: ""
+abbrev: "Sci. Data"
 ---
 
 # K-EmoPhone: A Mobile and Wearable Dataset with In-Situ Emotion, Stress, and Attention Labels

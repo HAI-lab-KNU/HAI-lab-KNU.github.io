@@ -10,6 +10,7 @@ doi: "https://www.dbpia.co.kr/Journal/articleDetail?nodeId=NODE11527339"
 paper: "/paper/HCIK23_smartCar.pdf"
 slide: ""
 video: ""
+abbrev: "HCIK"
 ---
 
 # 2단계 자율주행 중 시각 및 청각 이차 과제 수행이 제어권 전환 능력에 미치는 영향

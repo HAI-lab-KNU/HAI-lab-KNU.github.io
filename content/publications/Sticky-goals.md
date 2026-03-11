@@ -9,6 +9,7 @@ doi: "10.1145/3411764.3445295"
 paper: "/paper/CHI21_commitments.pdf"
 slide: ""
 video: "https://www.youtube.com/watch?v=mSCXgOceCpA"
+abbrev: "CHI"
 tags: ["Top Conference"]
 ---
 

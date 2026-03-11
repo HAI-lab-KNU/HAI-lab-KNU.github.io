@@ -2,6 +2,7 @@ import * as React from "react"
 import { graphql, PageProps, Link } from "gatsby"
 import Layout from "../components/layout"
 import YearFilter from "../components/YearFilter"
+import PublicationTimeline from "../components/PublicationTimeline"
 import { FaMedal, FaFilePdf, FaPlay } from "react-icons/fa"
 import Seo from "../components/seo"
 
@@ -24,6 +25,7 @@ type DataProps = {
         paper: string
         slide: string
         video: string
+        abbrev?: string
         award?: string
       }
     }[]
@@ -32,13 +34,18 @@ type DataProps = {
 
 const PublicationsPage: React.FC<PageProps<DataProps>> = ({ data }) => {
   const publications = data.allMarkdownRemark.nodes
-  const [startYear, setStartYear] = React.useState<string>("")
+  const [startYear, setStartYear] = React.useState<string>(() => {
+    const years = [...new Set(publications.map(p => p.frontmatter.year).filter((y): y is string => y != null && y !== ""))]
+    if (years.length === 0) return ""
+    years.sort((a, b) => parseInt(a, 10) - parseInt(b, 10))
+    return years[0]
+  })
   const [endYear, setEndYear] = React.useState<string>("")
   const [selectedTypes, setSelectedTypes] = React.useState<string[]>([])
 
-  // 사용 가능한 연도 목록 생성 (최신순)
+  // 사용 가능한 연도 목록 생성 (최신순, 유효한 연도만)
   const availableYears = React.useMemo(() => {
-    const years = [...new Set(publications.map(pub => pub.frontmatter.year))].sort((a, b) => parseInt(b) - parseInt(a))
+    const years = [...new Set(publications.map(pub => pub.frontmatter.year).filter((y): y is string => y != null && y !== ""))].sort((a, b) => parseInt(b, 10) - parseInt(a, 10))
     return years
   }, [publications])
 
@@ -101,6 +108,9 @@ const PublicationsPage: React.FC<PageProps<DataProps>> = ({ data }) => {
     <Layout activeLink="Publications">
       <div className="max-w-7xl mx-auto px-3 md:px-8 py-6 md:py-8">
         <div className="space-y-8">
+        {/* 연도·유형별 시각화 (필터 위) */}
+        <PublicationTimeline publications={publications} />
+
         {/* 연도 필터 */}
         <YearFilter
           startYear={startYear}
@@ -239,6 +249,7 @@ export const query = graphql`
           paper
           slide
           video
+          abbrev
           award
           tags
         }

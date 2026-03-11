@@ -9,6 +9,7 @@ doi: "10.1145/3411810"
 paper: "/paper/IMWUT20_smartspeaker.pdf"
 slide: ""
 video: "https://www.youtube.com/watch?v=0G-XhcPJNiw"
+abbrev: "IMWUT"
 tags: ["Top Conference"]
 ---
 
