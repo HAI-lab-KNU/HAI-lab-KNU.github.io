@@ -73,12 +73,10 @@ const BlogPage: React.FC<PageProps<DataProps>> = ({ data }) => {
         <div className="space-y-8">
         {/* 태그 필터 */}
         <div className="mb-1 md:mb-4">
-          <div className="bg-gray-50 rounded-lg p-1.5 md:p-3">
-            <h3 className="text-xs font-normal text-gray-700 mb-1 md:mb-3 text-center">Research Area</h3>
+          <div className="bg-surface-muted rounded-lg p-1.5 md:p-3">
+            <h3 className="text-xs font-normal text-secondary mb-1 md:mb-3 text-center">Research Area</h3>
             
-            {/* 태그 컨테이너 */}
             <div className="flex flex-col gap-2 md:gap-3 justify-center">
-              {/* 대분류 태그들 (윗줄) */}
               <div className="flex flex-wrap gap-0.5 md:gap-1.5 justify-center">
                 {['Human-Computer Interaction', 'Ubiquitous Computing', 'Proactive System'].map((tag) => (
                   <button
@@ -86,8 +84,8 @@ const BlogPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                     onClick={() => handleTagToggle(tag)}
                     className={`px-1 py-0.5 rounded-full font-normal transition-all duration-300 text-xs whitespace-nowrap flex items-center gap-0.5 flex-shrink-0 ${
                       selectedTags.includes(tag)
-                        ? "bg-blue-100 text-blue-700 border border-blue-300 shadow-sm"
-                        : "bg-white text-gray-600 border border-gray-300 hover:bg-gray-50 hover:text-blue-600 hover:border-blue-200"
+                        ? "bg-accent-muted text-blue-700 dark:text-white dark:border dark:border-blue-500 border border-blue-300 shadow-sm"
+                        : "bg-surface text-primary border border-default hover:bg-surface-subtle hover:text-accent hover:border-default"
                     }`}
                   >
                     {selectedTags.includes(tag) && (
@@ -106,8 +104,8 @@ const BlogPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                     onClick={() => handleTagToggle(tag)}
                     className={`px-1 py-0.5 rounded-full font-normal transition-all duration-300 text-xs whitespace-nowrap flex items-center gap-0.5 flex-shrink-0 ${
                       selectedTags.includes(tag)
-                        ? "bg-blue-100 text-blue-700 border border-blue-300 shadow-sm"
-                        : "bg-white text-gray-600 border border-gray-300 hover:bg-gray-50 hover:text-blue-600 hover:border-blue-200"
+                        ? "bg-accent-muted text-blue-700 dark:text-white dark:border dark:border-blue-500 border border-blue-300 shadow-sm"
+                        : "bg-surface text-primary border border-default hover:bg-surface-subtle hover:text-accent hover:border-default"
                     }`}
                   >
                     {selectedTags.includes(tag) && (
@@ -123,100 +121,35 @@ const BlogPage: React.FC<PageProps<DataProps>> = ({ data }) => {
         
         {filteredPosts.length === 0 ? (
           <div className="text-center py-12">
-            <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
-              <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-16 h-16 mx-auto mb-4 bg-surface-subtle rounded-full flex items-center justify-center">
+              <svg className="w-8 h-8 text-muted-subtle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
               </svg>
             </div>
-            <p className="text-gray-500 text-lg font-medium">No projects found</p>
-            <p className="text-gray-400 text-sm mt-1">Try adjusting your filter criteria</p>
+            <p className="text-muted-subtle text-lg font-medium">No projects found</p>
+            <p className="text-muted-subtle text-sm mt-1">Try adjusting your filter criteria</p>
           </div>
         ) : (
           <div className="space-y-6">
             {filteredPosts.map((post) => {
               return (
-                <article key={post.id} className="group bg-white hover:bg-gray-50 transition-all duration-300 border-b border-gray-200 py-4">
+                <article key={post.id} className="group bg-surface hover:bg-surface-subtle transition-all duration-300 py-4">
                   <Link to={post.fields.slug} className="block">
                     <div className="flex flex-col md:flex-row items-center">
-                      {/* 왼쪽: 썸네일 이미지 */}
-                      <div className="w-full md:w-1/4 h-32 md:h-24 overflow-hidden">
-                      {post.frontmatter.image1 && post.frontmatter.image2 && post.frontmatter.image3 && post.frontmatter.image4 ? (
-                        // 4개 이미지: car1, car2 좌우, car3, car4 아래 좌우
-                        <div className="w-full h-full flex flex-col p-2">
-                          <div className="w-full h-1/2 flex gap-1">
-                            <img
-                              src={post.frontmatter.image1}
-                              alt={`${post.frontmatter.title} - Image 1`}
-                              className="w-1/2 h-full object-contain rounded-lg group-hover:scale-105 transition-transform duration-500"
-                            />
-                            <img
-                              src={post.frontmatter.image2}
-                              alt={`${post.frontmatter.title} - Image 2`}
-                              className="w-1/2 h-full object-contain rounded-lg group-hover:scale-105 transition-transform duration-500"
-                            />
-                          </div>
-                          <div className="w-full h-1/2 flex gap-1 mt-1">
-                            <img
-                              src={post.frontmatter.image3}
-                              alt={`${post.frontmatter.title} - Image 3`}
-                              className="w-1/2 h-full object-contain rounded-lg group-hover:scale-105 transition-transform duration-500"
-                            />
-                            <img
-                              src={post.frontmatter.image4}
-                              alt={`${post.frontmatter.title} - Image 4`}
-                              className="w-1/2 h-full object-contain rounded-lg group-hover:scale-105 transition-transform duration-500"
-                            />
-                          </div>
-                        </div>
-                      ) : post.frontmatter.image1 && post.frontmatter.image2 && post.frontmatter.image3 ? (
-                        // 3개 이미지: car1, car2 좌우, car3 아래
-                        <div className="w-full h-full flex flex-col p-2">
-                          <div className="w-full h-2/3 flex gap-1">
-                            <img
-                              src={post.frontmatter.image1}
-                              alt={`${post.frontmatter.title} - Image 1`}
-                              className="w-1/2 h-full object-contain rounded-lg group-hover:scale-105 transition-transform duration-500"
-                            />
-                            <img
-                              src={post.frontmatter.image2}
-                              alt={`${post.frontmatter.title} - Image 2`}
-                              className="w-1/2 h-full object-contain rounded-lg group-hover:scale-105 transition-transform duration-500"
-                            />
-                          </div>
+                      {/* 왼쪽: 썸네일 이미지 - 흰 배경으로 통일 */}
+                      <div className="w-full md:w-1/4 h-32 md:h-24 overflow-hidden bg-white rounded-lg flex-shrink-0">
+                      {(post.frontmatter.thumbnail || post.frontmatter.image1) ? (
+                        <div className="w-full h-full p-2 flex items-center justify-center bg-white">
                           <img
-                            src={post.frontmatter.image3}
-                            alt={`${post.frontmatter.title} - Image 3`}
-                            className="w-full h-1/3 object-contain rounded-lg mt-1 group-hover:scale-105 transition-transform duration-500"
-                          />
-                        </div>
-                      ) : post.frontmatter.image1 && post.frontmatter.image2 ? (
-                        // IoT 프로젝트는 상하로, 다른 프로젝트는 좌우로 표시
-                        <div className={`w-full h-full p-2 ${post.frontmatter.title.includes('IoT-Enabled') ? 'flex flex-col gap-1' : 'flex gap-1'}`}>
-                          <img
-                            src={post.frontmatter.image1}
-                            alt={`${post.frontmatter.title} - Image 1`}
-                            className={`${post.frontmatter.title.includes('IoT-Enabled') ? 'w-full h-1/2' : 'w-1/2 h-full'} object-contain rounded-lg group-hover:scale-105 transition-transform duration-500`}
-                          />
-                          <img
-                            src={post.frontmatter.image2}
-                            alt={`${post.frontmatter.title} - Image 2`}
-                            className={`${post.frontmatter.title.includes('IoT-Enabled') ? 'w-full h-1/2' : 'w-1/2 h-full'} object-contain rounded-lg group-hover:scale-105 transition-transform duration-500`}
-                          />
-                        </div>
-                      ) : post.frontmatter.thumbnail ? (
-                        // 일반 프로젝트: 썸네일 표시
-                        <div className="w-full h-full p-4 flex items-center justify-center">
-                          <img
-                            src={post.frontmatter.thumbnail}
+                            src={post.frontmatter.thumbnail || post.frontmatter.image1}
                             alt={post.frontmatter.title}
-                            className="w-full h-full object-contain rounded-lg group-hover:scale-105 transition-transform duration-500"
+                            className="w-full h-full object-contain rounded group-hover:scale-105 transition-transform duration-500"
                           />
                         </div>
                       ) : (
-                        // 이미지 없음
-                        <div className="w-full h-full flex items-center justify-center text-gray-400 group-hover:text-gray-500 transition-colors duration-300">
+                        <div className="w-full h-full flex items-center justify-center bg-white text-muted-subtle group-hover:text-muted-subtle transition-colors duration-300">
                           <div className="text-center">
-                            <div className="w-16 h-16 mx-auto mb-2 bg-gray-200 rounded-full flex items-center justify-center group-hover:bg-gray-300 transition-colors duration-300">
+                            <div className="w-16 h-16 mx-auto mb-2 bg-surface-subtle rounded-full flex items-center justify-center group-hover:bg-surface-subtle transition-colors duration-300">
                               <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                               </svg>
@@ -229,12 +162,12 @@ const BlogPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                     
                       {/* 오른쪽: 텍스트 내용 */}
                       <div className="w-full md:w-3/4 pl-4 md:pl-6 pt-4">
-                        <h2 className="text-base md:text-lg font-normal text-gray-800 group-hover:text-blue-600 transition-all duration-300 leading-tight mb-2">
+                        <h2 className="text-base md:text-lg font-normal text-secondary group-hover:text-accent transition-all duration-300 leading-tight mb-2">
                           {post.frontmatter.title}
                         </h2>
                         {/* 프로젝트 참여자 표시 */}
                         {post.frontmatter.people && post.frontmatter.people.length > 0 && (
-                          <p className="text-xs text-gray-600 mb-1">
+                          <p className="text-xs text-muted mb-1">
                             {post.frontmatter.people.map((person, index) => (
                               <span key={index}>
                                 {person.name}
@@ -247,7 +180,7 @@ const BlogPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                         {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
                           <div className="flex flex-wrap gap-0.5">
                             {post.frontmatter.tags.map((tag, index) => (
-                              <span key={index} className="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-normal bg-gray-100 text-gray-700">
+                              <span key={index} className="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-normal bg-surface-subtle text-primary border border-transparent">
                                 {tag}
                               </span>
                             ))}

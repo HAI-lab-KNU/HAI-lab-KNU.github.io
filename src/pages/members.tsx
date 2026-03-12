@@ -113,19 +113,19 @@ const MembersPage: React.FC<PageProps<DataProps>> = ({ data }) => {
         {sortedPositions.map((position, index) => (
           <div key={position} id={position.toLowerCase().replace(/\s+/g, '-')}>
             {index > 0 && (
-              <div className="border-t border-gray-200 my-8"></div>
+              <div className="my-8"></div>
             )}
             <div className="space-y-6">
-              <h2 id={position.toLowerCase().replace(/\s+/g, '-')} className="text-base md:text-xl font-normal text-black font-sans tracking-wide text-left">
+              <h2 id={position.toLowerCase().replace(/\s+/g, '-')} className="text-base md:text-xl font-normal text-primary font-sans tracking-wide text-left">
                 {position === 'Professor' ? 'Director' : position}
               </h2>
               
               {/* 그리드 레이아웃으로 멤버 표시 */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {groupedMembers[position].map((member) => (
-                  <div key={member.id} className="bg-white rounded-lg p-2 md:p-4 text-center hover:bg-gray-50 transition-colors duration-200">
+                  <div key={member.id} className="bg-surface rounded-lg p-2 md:p-4 text-center hover:bg-surface-subtle transition-colors duration-200">
                     {/* 멤버 사진 */}
-                    <div className="w-48 h-48 mx-auto mb-4 rounded-full overflow-hidden bg-gray-100">
+                    <div className="w-48 h-48 mx-auto mb-4 rounded-full overflow-hidden bg-surface-subtle">
                       {member.frontmatter.photo ? (
                         <img
                           src={`/images/members/${member.frontmatter.photo}`}
@@ -151,7 +151,7 @@ const MembersPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                     </div>
                     
                     {/* 멤버 이름 */}
-                    <h3 className="text-sm md:text-lg font-semibold text-gray-900 mb-2">
+                    <h3 className="text-sm md:text-lg font-semibold text-primary mb-2">
                       
                       {member.frontmatter.name === "Ji Wook Lee" ? "Jiwook Lee" :
                        member.frontmatter.name === "Min Gyu Han" ? "Mingyu Han" :
@@ -161,14 +161,14 @@ const MembersPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                     </h3>
                     
                     {/* 직급 */}
-                    <p className="text-xs md:text-sm text-blue-600 font-medium mb-3">
+                    <p className="text-xs md:text-sm text-accent font-medium mb-3">
                       {member.frontmatter.position === 'Alumni' && member.frontmatter.graduation 
                         ? member.frontmatter.graduation 
                         : member.frontmatter.position}
                     </p>
                     
                     {/* 연구 분야 - 항상 2칸 고정 높이 */}
-                    <div className="text-xs text-gray-600 mb-3 h-6 md:h-8 flex flex-col justify-center">
+                    <div className="text-xs text-muted mb-3 h-6 md:h-8 flex flex-col justify-center">
                       {member.frontmatter.research_interests && member.frontmatter.research_interests.length > 0 ? (
                         member.frontmatter.research_interests.slice(0, 2).map((interest, index) => (
                           <div key={index} className="text-center mb-1">
@@ -190,7 +190,7 @@ const MembersPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                       {member.frontmatter.email && (
                         <a 
                           href={`mailto:${member.frontmatter.email}`}
-                          className="w-6 h-6 bg-gray-500 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"
+                          className="w-6 h-6 bg-primary dark:bg-surface-subtle rounded-full flex items-center justify-center hover:bg-accent transition-colors"
                           title={`Send email to ${member.frontmatter.email}`}
                         >
                           <MdEmail className="w-3 h-3 text-white" />
@@ -203,7 +203,7 @@ const MembersPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                           href={member.frontmatter.homepage}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-6 h-6 bg-gray-500 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"
+                          className="w-6 h-6 bg-primary dark:bg-surface-subtle rounded-full flex items-center justify-center hover:bg-accent transition-colors"
                           title="Visit homepage"
                         >
                           <FaHome className="w-3 h-3 text-white" />
@@ -216,7 +216,7 @@ const MembersPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                           href={member.frontmatter.googleScholar}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-6 h-6 bg-gray-500 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"
+                          className="w-6 h-6 bg-primary dark:bg-surface-subtle rounded-full flex items-center justify-center hover:bg-accent transition-colors"
                           title="View Google Scholar profile"
                         >
                           <SiGooglescholar className="w-3 h-3 text-white" />
@@ -240,8 +240,8 @@ const MembersPage: React.FC<PageProps<DataProps>> = ({ data }) => {
               top: '16rem'
             }}
           >
-            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4">
-              <h4 className="text-sm font-medium text-gray-900 mb-3 pb-2 border-b border-gray-200">
+            <div className="bg-surface/90 backdrop-blur-sm rounded-lg p-4">
+              <h4 className="text-sm font-medium text-primary mb-3 pb-2">
                 Index
               </h4>
               <nav className="space-y-2">
@@ -251,8 +251,8 @@ const MembersPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                     href={`#${position.toLowerCase().replace(/\s+/g, '-')}`}
                     className={`block text-sm py-1 px-2 rounded transition-colors duration-200 whitespace-nowrap ${
                       activeSection === position.toLowerCase().replace(/\s+/g, '-') 
-                        ? 'text-blue-700 font-light' 
-                        : 'text-gray-600 hover:text-blue-600 font-light'
+                        ? 'text-accent font-light' 
+                        : 'text-muted hover:text-accent font-light'
                     }`}
                   >
                     {position === 'Professor' ? 'Director' : position}

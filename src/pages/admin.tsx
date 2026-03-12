@@ -252,8 +252,8 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
     <Layout activeLink="Admin">
         <div className="max-w-6xl mx-auto px-6 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">HAI Lab 관리</h1>
-          <p className="text-gray-600">멤버, 출판물, 강의를 관리할 수 있습니다.</p>
+          <h1 className="text-3xl font-bold text-primary mb-2">HAI Lab 관리</h1>
+          <p className="text-muted">멤버, 출판물, 강의를 관리할 수 있습니다.</p>
         </div>
 
         {/* 탭 네비게이션 */}
@@ -263,8 +263,8 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
               onClick={() => setActiveTab('members')}
               className={`py-2 px-1 border-b-2 font-medium text-sm ${
                 activeTab === 'members'
-                  ? 'border-blue-500 text-blue-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  ? 'border-blue-500 text-accent'
+                  : 'border-transparent text-muted-subtle hover:text-secondary hover:border-gray-300'
               }`}
             >
               멤버 ({members.length})
@@ -273,8 +273,8 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
               onClick={() => setActiveTab('publications')}
               className={`py-2 px-1 border-b-2 font-medium text-sm ${
                 activeTab === 'publications'
-                  ? 'border-blue-500 text-blue-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  ? 'border-blue-500 text-accent'
+                  : 'border-transparent text-muted-subtle hover:text-secondary hover:border-gray-300'
               }`}
             >
               출판물 ({publications.length})
@@ -283,8 +283,8 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
               onClick={() => setActiveTab('lectures')}
               className={`py-2 px-1 border-b-2 font-medium text-sm ${
                 activeTab === 'lectures'
-                  ? 'border-blue-500 text-blue-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  ? 'border-blue-500 text-accent'
+                  : 'border-transparent text-muted-subtle hover:text-secondary hover:border-gray-300'
               }`}
             >
               강의 ({lectures.length})
@@ -293,8 +293,8 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
               onClick={() => setActiveTab('projects')}
               className={`py-2 px-1 border-b-2 font-medium text-sm ${
                 activeTab === 'projects'
-                  ? 'border-blue-500 text-blue-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  ? 'border-blue-500 text-accent'
+                  : 'border-transparent text-muted-subtle hover:text-secondary hover:border-gray-300'
               }`}
             >
               프로젝트 ({projects.length})
@@ -307,7 +307,7 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
           {activeTab === 'members' && (
             <button
               onClick={() => setShowAddForm(true)}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+              className="bg-accent hover:bg-accent-hover text-white px-4 py-2 rounded-lg font-medium transition-colors"
             >
               + 새 멤버 추가
             </button>
@@ -315,7 +315,7 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
           {activeTab === 'publications' && (
             <button
               onClick={() => alert('출판물 추가 기능은 개발 중입니다.')}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+              className="bg-accent hover:bg-accent-hover text-white px-4 py-2 rounded-lg font-medium transition-colors"
             >
               + 새 출판물 추가
             </button>
@@ -323,7 +323,7 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
           {activeTab === 'lectures' && (
             <button
               onClick={() => alert('강의 추가 기능은 개발 중입니다.')}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+              className="bg-accent hover:bg-accent-hover text-white px-4 py-2 rounded-lg font-medium transition-colors"
             >
               + 새 강의 추가
             </button>
@@ -331,7 +331,7 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
           {activeTab === 'projects' && (
             <button
               onClick={() => alert('프로젝트 추가 기능은 개발 중입니다.')}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+              className="bg-accent hover:bg-accent-hover text-white px-4 py-2 rounded-lg font-medium transition-colors"
             >
               + 새 프로젝트 추가
             </button>
@@ -340,31 +340,31 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
 
         {/* 멤버 추가/수정 폼 */}
         {showAddForm && activeTab === 'members' && (
-          <div className="bg-white border border-gray-200 rounded-lg p-6 mb-6">
+          <div className="bg-surface border border-default rounded-lg p-6 mb-6">
             <h2 className="text-xl font-semibold mb-4">
               {editingMember ? "멤버 수정" : "새 멤버 추가"}
             </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">이름</label>
+                <label htmlFor="name" className="block text-sm font-medium text-secondary mb-1">이름</label>
                 <input
                   id="name"
                   type="text"
                   value={newMember.name}
                   onChange={(e) => handleInputChange('name', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-default rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="멤버 이름"
                 />
               </div>
               
               <div>
-                <label htmlFor="position" className="block text-sm font-medium text-gray-700 mb-1">직급</label>
+                <label htmlFor="position" className="block text-sm font-medium text-secondary mb-1">직급</label>
                 <select
                   id="position"
                   value={newMember.position}
                   onChange={(e) => handleInputChange('position', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-default rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   <option value="Professor">Professor</option>
                   <option value="Ph.D Student">Ph.D Student</option>
@@ -375,62 +375,62 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
               </div>
               
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">이메일</label>
+                <label htmlFor="email" className="block text-sm font-medium text-secondary mb-1">이메일</label>
                 <input
                   id="email"
                   type="email"
                   value={newMember.email}
                   onChange={(e) => handleInputChange('email', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-default rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="이메일 주소"
                 />
               </div>
               
               <div>
-                <label htmlFor="photo" className="block text-sm font-medium text-gray-700 mb-1">프로필 사진</label>
+                <label htmlFor="photo" className="block text-sm font-medium text-secondary mb-1">프로필 사진</label>
                 <input
                   id="photo"
                   type="text"
                   value={newMember.photo}
                   onChange={(e) => handleInputChange('photo', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-default rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="사진 파일명 (예: member-name.png)"
                 />
               </div>
               
               <div>
-                <label htmlFor="homepage" className="block text-sm font-medium text-gray-700 mb-1">홈페이지</label>
+                <label htmlFor="homepage" className="block text-sm font-medium text-secondary mb-1">홈페이지</label>
                 <input
                   id="homepage"
                   type="url"
                   value={newMember.homepage}
                   onChange={(e) => handleInputChange('homepage', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-default rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="홈페이지 URL"
                 />
               </div>
               
               <div>
-                <label htmlFor="googleScholar" className="block text-sm font-medium text-gray-700 mb-1">Google Scholar</label>
+                <label htmlFor="googleScholar" className="block text-sm font-medium text-secondary mb-1">Google Scholar</label>
                 <input
                   id="googleScholar"
                   type="url"
                   value={newMember.googleScholar}
                   onChange={(e) => handleInputChange('googleScholar', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-default rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Google Scholar URL"
                 />
               </div>
             </div>
             
             <div className="mt-4">
-              <label htmlFor="research_interests" className="block text-sm font-medium text-gray-700 mb-1">연구 관심사</label>
+              <label htmlFor="research_interests" className="block text-sm font-medium text-secondary mb-1">연구 관심사</label>
               <input
                 id="research_interests"
                 type="text"
                 value={newMember.research_interests.join(", ")}
                 onChange={(e) => handleInputChange('research_interests', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-default rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="연구 관심사 (쉼표로 구분)"
               />
             </div>
@@ -438,7 +438,7 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
             <div className="mt-6 flex gap-3">
               <button
                 onClick={editingMember ? handleUpdateMember : handleAddMember}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+                className="bg-accent hover:bg-accent-hover text-white px-4 py-2 rounded-lg font-medium transition-colors"
               >
                 {editingMember ? "수정" : "추가"}
               </button>
@@ -447,7 +447,7 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                   setShowAddForm(false)
                   setEditingMember(null)
                 }}
-                className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+                className="bg-surface-muted hover:bg-surface-subtle text-primary px-4 py-2 rounded-lg font-medium transition-colors"
               >
                 취소
               </button>
@@ -457,16 +457,16 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
 
         {/* 멤버 목록 */}
         {activeTab === 'members' && (
-          <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
-            <div className="px-6 py-4 border-b border-gray-200">
+          <div className="bg-surface border border-default rounded-lg overflow-hidden">
+            <div className="px-6 py-4 border-b border-default">
               <h2 className="text-lg font-semibold">현재 멤버 목록</h2>
             </div>
             
-            <div className="divide-y divide-gray-200">
+            <div className="divide-y divide-default">
               {members.map((member) => (
                 <div key={member.id} className="px-6 py-4 flex items-center justify-between">
                   <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
+                    <div className="w-12 h-12 bg-surface-subtle rounded-full flex items-center justify-center">
                       {member.photo ? (
                         <img 
                           src={`/images/members/${member.photo}`} 
@@ -474,19 +474,19 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                           className="w-12 h-12 rounded-full object-cover"
                         />
                       ) : (
-                        <span className="text-gray-500 font-medium">
+                        <span className="text-muted-subtle font-medium">
                           {member.name.charAt(0)}
                         </span>
                       )}
                     </div>
                     <div>
-                      <h3 className="font-medium text-gray-900">{member.name}</h3>
-                      <p className="text-sm text-gray-600">{member.position}</p>
-                      <p className="text-sm text-gray-500">{member.email}</p>
+                      <h3 className="font-medium text-primary">{member.name}</h3>
+                      <p className="text-sm text-muted">{member.position}</p>
+                      <p className="text-sm text-muted-subtle">{member.email}</p>
                       {member.research_interests && member.research_interests.length > 0 && (
                         <div className="mt-1">
-                          <span className="text-xs text-gray-400">연구 관심사: </span>
-                          <span className="text-xs text-gray-600">
+                          <span className="text-xs text-muted-subtle">연구 관심사: </span>
+                          <span className="text-xs text-muted">
                             {member.research_interests.join(", ")}
                           </span>
                         </div>
@@ -497,7 +497,7 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                   <div className="flex space-x-2">
                     <button
                       onClick={() => handleEditMember(member)}
-                      className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                      className="text-accent hover:text-accent text-sm font-medium"
                     >
                       수정
                     </button>
@@ -516,37 +516,37 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
 
         {/* 출판물 목록 */}
         {activeTab === 'publications' && (
-          <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
-            <div className="px-6 py-4 border-b border-gray-200">
+          <div className="bg-surface border border-default rounded-lg overflow-hidden">
+            <div className="px-6 py-4 border-b border-default">
               <h2 className="text-lg font-semibold">출판물 목록</h2>
             </div>
             
-            <div className="divide-y divide-gray-200">
+            <div className="divide-y divide-default">
               {publications.map((publication) => (
                 <div key={publication.id} className="px-6 py-4">
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
-                      <h3 className="font-medium text-gray-900 mb-1">{publication.title}</h3>
-                      <p className="text-sm text-gray-600 mb-1">{publication.authors}</p>
-                      <p className="text-sm text-gray-500 mb-2">{publication.journal} ({publication.year})</p>
+                      <h3 className="font-medium text-primary mb-1">{publication.title}</h3>
+                      <p className="text-sm text-muted mb-1">{publication.authors}</p>
+                      <p className="text-sm text-muted-subtle mb-2">{publication.journal} ({publication.year})</p>
                       {publication.abstract && (
-                        <p className="text-sm text-gray-600 line-clamp-2">{publication.abstract}</p>
+                        <p className="text-sm text-muted line-clamp-2">{publication.abstract}</p>
                       )}
                       <div className="mt-2 flex space-x-4">
                         {publication.doi && (
-                          <a href={publication.doi} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 text-sm">
+                          <a href={publication.doi} target="_blank" rel="noopener noreferrer" className="text-accent hover:text-accent text-sm">
                             DOI
                           </a>
                         )}
                         {publication.paper && (
-                          <a href={publication.paper} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 text-sm">
+                          <a href={publication.paper} target="_blank" rel="noopener noreferrer" className="text-accent hover:text-accent text-sm">
                             PDF
                           </a>
                         )}
                       </div>
                     </div>
                     <div className="flex space-x-2 ml-4">
-                      <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                      <button className="text-accent hover:text-accent text-sm font-medium">
                         수정
                       </button>
                       <button className="text-red-600 hover:text-red-800 text-sm font-medium">
@@ -562,24 +562,24 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
 
         {/* 강의 목록 */}
         {activeTab === 'lectures' && (
-          <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
-            <div className="px-6 py-4 border-b border-gray-200">
+          <div className="bg-surface border border-default rounded-lg overflow-hidden">
+            <div className="px-6 py-4 border-b border-default">
               <h2 className="text-lg font-semibold">강의 목록</h2>
             </div>
             
-            <div className="divide-y divide-gray-200">
+            <div className="divide-y divide-default">
               {lectures.map((lecture) => (
                 <div key={lecture.id} className="px-6 py-4">
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
-                      <h3 className="font-medium text-gray-900 mb-1">{lecture.title}</h3>
-                      <p className="text-sm text-gray-500 mb-2">{lecture.date}</p>
+                      <h3 className="font-medium text-primary mb-1">{lecture.title}</h3>
+                      <p className="text-sm text-muted-subtle mb-2">{lecture.date}</p>
                       {lecture.description && (
-                        <p className="text-sm text-gray-600">{lecture.description}</p>
+                        <p className="text-sm text-muted">{lecture.description}</p>
                       )}
                     </div>
                     <div className="flex space-x-2 ml-4">
-                      <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                      <button className="text-accent hover:text-accent text-sm font-medium">
                         수정
                       </button>
                       <button className="text-red-600 hover:text-red-800 text-sm font-medium">
@@ -595,19 +595,19 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
 
         {/* 프로젝트 목록 */}
         {activeTab === 'projects' && (
-          <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
-            <div className="px-6 py-4 border-b border-gray-200">
+          <div className="bg-surface border border-default rounded-lg overflow-hidden">
+            <div className="px-6 py-4 border-b border-default">
               <h2 className="text-lg font-semibold">프로젝트 목록</h2>
             </div>
             
-            <div className="divide-y divide-gray-200">
+            <div className="divide-y divide-default">
               {projects.map((project) => (
                 <div key={project.id} className="px-6 py-4">
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
                       <div className="flex items-start space-x-4">
                         {/* 프로젝트 이미지 */}
-                        <div className="w-20 h-20 bg-gray-200 rounded-lg flex-shrink-0 overflow-hidden">
+                        <div className="w-20 h-20 bg-surface-subtle rounded-lg flex-shrink-0 overflow-hidden">
                           {project.thumbnail ? (
                             <img 
                               src={project.thumbnail} 
@@ -621,7 +621,7 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                               className="w-full h-full object-cover"
                             />
                           ) : (
-                            <div className="w-full h-full flex items-center justify-center text-gray-400">
+                            <div className="w-full h-full flex items-center justify-center text-muted-subtle">
                               <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                               </svg>
@@ -631,17 +631,17 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                         
                         {/* 프로젝트 정보 */}
                         <div className="flex-1">
-                          <h3 className="font-medium text-gray-900 mb-1">{project.title}</h3>
-                          <p className="text-sm text-gray-500 mb-2">{project.date}</p>
+                          <h3 className="font-medium text-primary mb-1">{project.title}</h3>
+                          <p className="text-sm text-muted-subtle mb-2">{project.date}</p>
                           {project.description && (
-                            <p className="text-sm text-gray-600 mb-2 line-clamp-2">{project.description}</p>
+                            <p className="text-sm text-muted mb-2 line-clamp-2">{project.description}</p>
                           )}
                           
                           {/* 프로젝트 참여자 */}
                           {project.people && project.people.length > 0 && (
                             <div className="mb-2">
-                              <span className="text-xs text-gray-400">참여자: </span>
-                              <span className="text-xs text-gray-600">
+                              <span className="text-xs text-muted-subtle">참여자: </span>
+                              <span className="text-xs text-muted">
                                 {project.people.map(person => person.name).join(", ")}
                               </span>
                             </div>
@@ -651,7 +651,7 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                           {project.tags && project.tags.length > 0 && (
                             <div className="flex flex-wrap gap-1">
                               {project.tags.map((tag, index) => (
-                                <span key={index} className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700">
+                                <span key={index} className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-accent-muted text-accent">
                                   {tag}
                                 </span>
                               ))}
@@ -662,7 +662,7 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                     </div>
                     
                     <div className="flex space-x-2 ml-4">
-                      <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                      <button className="text-accent hover:text-accent text-sm font-medium">
                         수정
                       </button>
                       <button className="text-red-600 hover:text-red-800 text-sm font-medium">
