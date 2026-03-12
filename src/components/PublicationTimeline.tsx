@@ -141,7 +141,7 @@ const PublicationTimeline: React.FC<PublicationTimelineProps> = ({ publications,
           style={{ scrollbarGutter: "stable" }}
         >
           {/* 범례: 위에 유지, 모바일에서만 오른쪽 정렬(최신 먼저 보일 때 보이도록), 글자+상자 */}
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mb-2 text-xs text-gray-600 justify-end md:justify-start">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mb-2 text-xs text-muted justify-end md:justify-start">
             {Object.entries(TYPE_COLORS).map(([type, { bg, label }]) => (
               <span key={type} className="inline-flex items-center gap-1">
                 <span className={`w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-sm ${bg} flex-shrink-0`} aria-hidden />
@@ -206,7 +206,7 @@ const PublicationTimeline: React.FC<PublicationTimelineProps> = ({ publications,
                           </div>
                           <div className="min-h-[1rem] flex items-center min-w-0 pl-1">
                             <span
-                              className="text-xs text-gray-700 truncate max-w-[56px] sm:max-w-[80px] md:max-w-[120px] leading-4 group-hover:text-blue-600"
+                              className="text-xs text-secondary truncate max-w-[56px] sm:max-w-[80px] md:max-w-[120px] leading-4 group-hover:text-accent"
                               aria-label={`${pub.frontmatter.title} (${pub.frontmatter.journal})`}
                             >
                               {short}
@@ -310,9 +310,9 @@ const PublicationTimeline: React.FC<PublicationTimelineProps> = ({ publications,
             const items = byYear[year] ?? []
             return (
               <div key={year} className="flex flex-col items-center pt-1">
-                <span className="w-px h-3 bg-gray-300 flex-shrink-0" aria-hidden />
-                <span className="text-xs font-medium text-gray-600 mt-1">{year}</span>
-                <span className="text-[10px] text-gray-400">({items.length})</span>
+                <span className="w-px h-3 bg-surface-subtle flex-shrink-0" aria-hidden />
+                <span className="text-xs font-medium text-muted mt-1">{year}</span>
+                <span className="text-[10px] text-muted-subtle">({items.length})</span>
               </div>
             )
           })}
@@ -321,7 +321,7 @@ const PublicationTimeline: React.FC<PublicationTimelineProps> = ({ publications,
         {/* 스크롤 가능 시 왼쪽에 표시 (과거 쪽으로 스크롤하라는 투명 화살표) */}
         {showScrollHint && (
           <div
-            className="absolute left-2 top-1/2 -translate-y-1/2 pointer-events-none flex items-center text-gray-400/60"
+            className="absolute left-2 top-1/2 -translate-y-1/2 pointer-events-none flex items-center text-muted-subtle/60"
             aria-hidden
           >
             <span className="text-lg font-light tracking-tight" style={{ textShadow: "0 0 8px white" }}>
@@ -345,7 +345,7 @@ const PublicationTimeline: React.FC<PublicationTimelineProps> = ({ publications,
             const top = triggerRect.top - 8
             return (
               <div
-                className="fixed z-[9999] px-3 py-2 rounded-lg shadow-lg border border-gray-200/70 whitespace-normal text-left pointer-events-none transition-opacity duration-150"
+                className="fixed z-[9999] px-3 py-2 rounded-lg shadow-lg border border-default whitespace-normal text-left pointer-events-none transition-opacity duration-150 bg-surface/95 backdrop-blur-sm"
                 style={{
                   left,
                   top,
@@ -353,15 +353,12 @@ const PublicationTimeline: React.FC<PublicationTimelineProps> = ({ publications,
                   minWidth: minW,
                   maxWidth: maxW,
                   transform: "translateY(-100%)",
-                  background: "rgba(248, 250, 252, 0.48)",
-                  backdropFilter: "blur(10px)",
-                  WebkitBackdropFilter: "blur(10px)",
                 }}
               >
                 <div className="flex items-baseline gap-2 flex-wrap">
-                  <span className="text-xs font-medium text-blue-600 shrink-0">PDF preprint</span>
-                  <span className="text-base font-normal text-gray-900 break-words leading-snug">
-                    “{hoveredPub.frontmatter.title}”
+                  <span className="text-xs font-medium text-accent shrink-0">PDF preprint</span>
+                  <span className="text-base font-normal text-primary break-words leading-snug">
+                    {`"${hoveredPub.frontmatter.title}"`}
                   </span>
                 </div>
               </div>

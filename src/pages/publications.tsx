@@ -120,7 +120,7 @@ const PublicationsPage: React.FC<PageProps<DataProps>> = ({ data }) => {
 
   return (
     <Layout activeLink="Publications">
-      <div className="max-w-7xl mx-auto px-3 md:px-8 py-6 md:py-8">
+      <div className="max-w-7xl mx-auto px-3 md:px-8 py-6 md:py-8 text-primary">
         <div className="space-y-8">
         {/* 연도·유형별 시각화. 타입을 하나도 선택 안 하면 타임라인 천천히 페이드아웃 후 비표시 */}
         <AnimatePresence mode="wait">
@@ -152,15 +152,15 @@ const PublicationsPage: React.FC<PageProps<DataProps>> = ({ data }) => {
         />
 
         {filteredPublications.length === 0 ? (
-          <p className="text-gray-600">No publications found for the selected filters.</p>
+          <p className="text-muted">No publications found for the selected filters.</p>
         ) : (
           <div className="space-y-8">
             {sortedYears.map((year) => (
               <div key={year} id={year} className="space-y-1">
-                <h2 className="text-base md:text-lg font-normal text-gray-800 border-b border-gray-200 pb-1">{year}</h2>
+                <h2 className="text-base md:text-lg font-normal text-secondary border-b border-default pb-1">{year}</h2>
                 <div className="space-y-6">
                   {groupedPublications[year].map((pub) => (
-                    <article key={pub.id} className="bg-white rounded-lg p-3 md:p-6 shadow-sm hover:bg-gray-50 transition-colors duration-200">
+                    <article key={pub.id} className="bg-surface rounded-lg p-3 md:p-6 shadow-sm hover:bg-surface-subtle transition-colors duration-200">
                       <div className="space-y-2">
                         {pub.frontmatter.doi ? (
                           <a
@@ -169,17 +169,17 @@ const PublicationsPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                             rel="noopener noreferrer"
                             className="block"
                           >
-                            <h2 className="text-base md:text-lg font-normal text-gray-900 hover:text-blue-600 transition-colors duration-200 cursor-pointer">
+                            <h2 className="text-base md:text-lg font-normal text-primary hover:text-accent transition-colors duration-200 cursor-pointer">
                               {pub.frontmatter.title}
                             </h2>
                           </a>
                         ) : (
-                          <h2 className="text-base md:text-lg font-normal text-gray-900">
+                          <h2 className="text-base md:text-lg font-normal text-primary">
                             {pub.frontmatter.title}
                           </h2>
                         )}
                         
-                        <div className="text-xs text-gray-600">
+                        <div className="text-xs text-muted">
                           <div className="mb-1 flex items-center gap-2">
                             <span>{pub.frontmatter.authors}</span>
                             {/* 수상 배지를 저자 이름 옆에 표시 */}
@@ -210,7 +210,7 @@ const PublicationsPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                               href={pub.frontmatter.paper}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded hover:bg-blue-100 transition-colors duration-200"
+                              className="inline-flex items-center px-2 py-1 bg-accent-muted text-accent text-xs rounded hover:bg-accent-muted transition-colors duration-200"
                             >
                               <FaFilePdf className="mr-1 w-3 h-3" />
                               PDF
@@ -221,7 +221,7 @@ const PublicationsPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                               href={pub.frontmatter.slide}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded hover:bg-blue-100 transition-colors duration-200"
+                              className="inline-flex items-center px-2 py-1 bg-accent-muted text-accent text-xs rounded hover:bg-accent-muted transition-colors duration-200"
                             >
                               slide
                             </a>
@@ -231,7 +231,7 @@ const PublicationsPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                               href={pub.frontmatter.video}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded hover:bg-blue-100 transition-colors duration-200"
+                              className="inline-flex items-center px-2 py-1 bg-accent-muted text-accent text-xs rounded hover:bg-accent-muted transition-colors duration-200"
                             >
                               <FaPlay className="mr-1 w-3 h-3" />
                               Video

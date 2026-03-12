@@ -17,30 +17,28 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
   return (
     <>
       {/* Hero Section - 2열 레이아웃으로 텍스트와 워드클라우드 배치 */}
-      <section className="pt-40 pb-8 bg-gradient-to-r from-blue-50 via-blue-10 to-white w-full">
+      <section className="pt-40 pb-8 bg-gradient-to-r from-page-muted via-page-muted to-page w-full">
         <div className="w-full max-w-7xl mx-auto px-6 md:px-8">
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
-            {/* 왼쪽 텍스트 영역 */}
             <div className="text-center md:text-left">
-              <h1 className="text-3xl md:text-5xl font-light text-black mb-6" id="main-heading">
+              <h1 className="text-3xl md:text-5xl font-light text-primary mb-6" id="main-heading">
                Human-AI Interaction Lab 
               </h1>
-              <p className="text-base text-gray-600 leading-relaxed font-light mb-8">
+              <p className="text-base text-muted leading-relaxed font-light mb-8">
                 We focus on how to design meaningful human interactions with AI systems in everyday life.
                 Our goal is making proactive AI agents that understand user context and behavior to give helpful suggestions, like <em>JARVIS</em> from Iron Man.
               </p>
               
-              {/* Research Areas */}
               <div className="space-y-4">
-                <h2 className="text-lg font-light text-gray-800 mb-4">Research Areas</h2>
+                <h2 className="text-lg font-light text-secondary mb-4">Research Areas</h2>
                 <div className="flex flex-wrap gap-2">
-                  <span className="inline-block px-3 py-1 text-xs font-light bg-white text-gray-700 rounded-full">
+                  <span className="inline-block px-3 py-1 text-xs font-light bg-surface text-primary rounded-full border border-default">
                     Human-Computer Interaction
                   </span>
-                  <span className="inline-block px-3 py-1 text-xs font-light bg-white text-gray-700 rounded-full">
+                  <span className="inline-block px-3 py-1 text-xs font-light bg-surface text-primary rounded-full border border-default">
                     Ubiquitous Computing
                   </span>
-                  <span className="inline-block px-3 py-1 text-xs font-light bg-white text-gray-700 rounded-full">
+                  <span className="inline-block px-3 py-1 text-xs font-light bg-surface text-primary rounded-full border border-default">
                     Proactive Systems
                   </span>
                 </div>
@@ -63,10 +61,10 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
 
       <Layout activeLink="Home">
         {/* Recent Projects Section */}
-        <section className="pt-16 pb-8 bg-white" aria-labelledby="recent-projects-heading">
+        <section className="pt-16 pb-8 bg-page transition-colors duration-300" aria-labelledby="recent-projects-heading">
           <div className="w-full max-w-7xl mx-auto px-6 md:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-6" id="recent-projects-heading">
+              <h2 className="text-4xl md:text-5xl font-light text-primary mb-6" id="recent-projects-heading">
                 Recent Projects
               </h2>
             </div>
@@ -78,84 +76,21 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
                       <Link 
                         to={post.fields.slug} 
                         key={post.id} 
-                        className="block bg-white rounded-lg p-3 md:p-4 shadow-sm hover:shadow-lg border border-gray-200 hover:border-blue-300 transition-all duration-300 cursor-pointer"
+                        className="block bg-surface rounded-lg p-3 md:p-4 shadow-sm hover:shadow-lg border border-default hover:border-default transition-all duration-300 cursor-pointer"
                       >
-                        {/* 썸네일 */}
+                        {/* 썸네일 - 흰 배경으로 통일 */}
                         <div className="mb-3">
-                          <div className="w-full h-24 md:h-40 rounded-lg overflow-hidden shadow-sm">
-                            {post.frontmatter.image1 && post.frontmatter.image2 && post.frontmatter.image3 && post.frontmatter.image4 ? (
-                              // 4개 이미지: car1, car2 좌우, car3, car4 아래 좌우
-                              <div className="w-full h-full flex flex-col">
-                                <div className="w-full h-1/2 flex">
-                                  <img
-                                    src={post.frontmatter.image1}
-                                    alt={`${post.frontmatter.title} - Image 1`}
-                                    className="w-1/2 h-full object-contain"
-                                  />
-                                  <img
-                                    src={post.frontmatter.image2}
-                                    alt={`${post.frontmatter.title} - Image 2`}
-                                    className="w-1/2 h-full object-contain"
-                                  />
-                                </div>
-                                <div className="w-full h-1/2 flex">
-                                  <img
-                                    src={post.frontmatter.image3}
-                                    alt={`${post.frontmatter.title} - Image 3`}
-                                    className="w-1/2 h-full object-contain"
-                                  />
-                                  <img
-                                    src={post.frontmatter.image4}
-                                    alt={`${post.frontmatter.title} - Image 4`}
-                                    className="w-1/2 h-full object-contain"
-                                  />
-                                </div>
-                              </div>
-                            ) : post.frontmatter.image1 && post.frontmatter.image2 && post.frontmatter.image3 ? (
-                              // 3개 이미지: car1, car2 좌우, car3 아래
-                              <div className="w-full h-full flex flex-col">
-                                <div className="w-full h-2/3 flex">
-                                  <img
-                                    src={post.frontmatter.image1}
-                                    alt={`${post.frontmatter.title} - Image 1`}
-                                    className="w-1/2 h-full object-contain"
-                                  />
-                                  <img
-                                    src={post.frontmatter.image2}
-                                    alt={`${post.frontmatter.title} - Image 2`}
-                                    className="w-1/2 h-full object-contain"
-                                  />
-                                </div>
+                          <div className="w-full h-24 md:h-40 rounded-lg overflow-hidden shadow-sm bg-white">
+                            {(post.frontmatter.thumbnail || post.frontmatter.image1) ? (
+                              <div className="w-full h-full p-2 flex items-center justify-center bg-white">
                                 <img
-                                  src={post.frontmatter.image3}
-                                  alt={`${post.frontmatter.title} - Image 3`}
-                                  className="w-full h-1/3 object-contain"
+                                  src={post.frontmatter.thumbnail || post.frontmatter.image1}
+                                  alt={post.frontmatter.title}
+                                  className="w-full h-full object-contain"
                                 />
                               </div>
-                            ) : post.frontmatter.image1 && post.frontmatter.image2 ? (
-                              // IoT 프로젝트는 상하로, 다른 프로젝트는 좌우로 표시
-                              <div className={`w-full h-full ${post.frontmatter.title.includes('IoT-Enabled') ? 'flex flex-col' : 'flex'}`}>
-                                <img
-                                  src={post.frontmatter.image1}
-                                  alt={`${post.frontmatter.title} - Image 1`}
-                                  className={`${post.frontmatter.title.includes('IoT-Enabled') ? 'w-full h-1/2' : 'w-1/2 h-full'} object-contain`}
-                                />
-                                <img
-                                  src={post.frontmatter.image2}
-                                  alt={`${post.frontmatter.title} - Image 2`}
-                                  className={`${post.frontmatter.title.includes('IoT-Enabled') ? 'w-full h-1/2' : 'w-1/2 h-full'} object-contain`}
-                                />
-                              </div>
-                            ) : post.frontmatter.thumbnail ? (
-                              // 일반 프로젝트: 썸네일 표시
-                              <img
-                                src={post.frontmatter.thumbnail}
-                                alt={post.frontmatter.title}
-                                className="w-full h-full object-contain"
-                              />
                             ) : (
-                              // 이미지 없음
-                              <div className="w-full h-full flex items-center justify-center text-gray-400">
+                              <div className="w-full h-full flex items-center justify-center bg-white text-muted-subtle">
                                 <span className="text-xs md:text-sm">No Image</span>
                               </div>
                             )}
@@ -164,14 +99,14 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
                         
                         {/* 프로젝트 제목과 태그 */}
                         <div className="text-center">
-                          <h3 className="text-base md:text-lg font-bold text-gray-900 mb-2">
+                          <h3 className="text-base md:text-lg font-bold text-primary mb-2">
                             {post.frontmatter.title}
                           </h3>
                           {/* 프로젝트 태그 표시 */}
                           {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
                             <div className="flex flex-wrap justify-center gap-1">
                               {post.frontmatter.tags.map((tag, index) => (
-                                <span key={index} className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-700">
+                                <span key={index} className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-surface-subtle text-primary">
                                   {tag}
                                 </span>
                               ))}
@@ -181,7 +116,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
                         
                         {/* 참여자 정보 */}
                         {post.frontmatter.people && post.frontmatter.people.length > 0 && (
-                          <div className="mt-3 pt-3 border-t border-gray-100">
+                          <div className="mt-3 pt-3 border-t border-border-muted">
                             <div className="flex items-center justify-center">
                               <div className="flex -space-x-1">
                                 {post.frontmatter.people.slice(0, 4).map((person, index) => {
@@ -207,16 +142,16 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
                                         }}
                                       />
                                       {/* 툴팁 */}
-                                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
+                                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 bg-surface text-primary text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
                                         {person.name}
-                                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-2 border-r-2 border-t-2 border-transparent border-t-gray-800"></div>
+                                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-2 border-r-2 border-t-2 border-transparent border-t-surface"></div>
                                       </div>
                                     </div>
                                   )
                                 })}
                                 {post.frontmatter.people.length > 4 && (
-                                  <div className="w-6 h-6 rounded-full bg-gray-300 border border-white flex items-center justify-center shadow-sm">
-                                    <span className="text-xs text-gray-600 font-medium">
+                                  <div className="w-6 h-6 rounded-full bg-surface-subtle border border-default flex items-center justify-center shadow-sm">
+                                    <span className="text-xs text-primary font-medium">
                                       +{post.frontmatter.people.length - 4}
                                     </span>
                                   </div>
@@ -234,15 +169,15 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
                 <div className="text-center mt-8">
                   <Link
                     to="/blog"
-                    className="inline-block text-blue-500 hover:text-blue-600 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-4 py-2 transition-all duration-200"
+                    className="inline-block text-accent hover:text-accent font-medium focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-page rounded px-4 py-2 transition-all duration-200"
                   >
                     View All Projects
                   </Link>
                 </div>
               </>
             ) : (
-              <div className="bg-white rounded-lg p-6 shadow-sm">
-                <p className="text-gray-600 text-center py-8">
+              <div className="bg-surface rounded-lg p-6 shadow-sm border border-default">
+                <p className="text-muted text-center py-8">
                   최근 프로젝트가 여기에 표시됩니다.
                 </p>
               </div>
@@ -252,7 +187,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
 
         {/* 구분선 */}
         <div className="max-w-4xl mx-auto px-4 md:px-6">
-          <hr className="border-gray-200 opacity-50 my-8" />
+          <hr className="border-default opacity-50 my-8" />
         </div>
       </Layout>
     </>

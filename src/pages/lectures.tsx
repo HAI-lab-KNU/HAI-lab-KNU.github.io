@@ -102,24 +102,24 @@ const LecturesPage: React.FC<PageProps<DataProps>> = ({ data }) => {
 
 
         {sortedLectures.length === 0 ? (
-          <p className="text-gray-600 text-center">No lectures match the selected filters.</p>
+          <p className="text-muted text-center">No lectures match the selected filters.</p>
         ) : (
           <div className="space-y-24">
             {sortedLectures.map((lecture) => (
-              <div key={lecture.id} className="border-b border-gray-100 pb-16">
-                <h2 className="text-base md:text-lg font-normal text-gray-800 leading-tight mb-2">
+              <div key={lecture.id} className="border-b border-border-muted pb-16">
+                <h2 className="text-base md:text-lg font-normal text-secondary leading-tight mb-2">
                   {lecture.frontmatter.title}
                 </h2>
-                <p className="text-sm md:text-base font-light text-gray-600 mb-2">
+                <p className="text-sm md:text-base font-light text-muted mb-2">
                   {lecture.frontmatter.description || lecture.excerpt}
                 </p>
                 <div className="flex items-start space-x-4">
                   {lecture.frontmatter.major === true && (
-                    <span className="px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-700">
+                    <span className="px-3 py-1 rounded-full text-xs font-medium bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300">
                       Major
                     </span>
                   )}
-                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
+                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-surface-subtle text-muted">
                     {lecture.frontmatter.period}
                   </span>
                 </div>

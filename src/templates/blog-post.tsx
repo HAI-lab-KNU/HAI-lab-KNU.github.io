@@ -54,7 +54,7 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
         <article className="flex-1 w-full">
         {/* 제목 섹션 */}
         <header className="text-center mb-12">
-          <h1 className="text-3xl font-normal text-gray-900 mb-6">
+          <h1 className="text-3xl font-normal text-primary mb-6">
             {post.frontmatter.title}
           </h1>
         </header>
@@ -84,9 +84,9 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
         {/* Abstract 섹션 */}
         {post.frontmatter.description && (
           <section id="abstract" className="mb-8 md:mb-12">
-            <h2 className="text-xl font-normal text-gray-900 mb-4 md:mb-6">Abstract</h2>
-            <div className="bg-gray-50 rounded-lg p-4 md:p-6">
-              <p className="text-sm md:text-base text-gray-700 leading-relaxed">
+            <h2 className="text-xl font-normal text-primary mb-4 md:mb-6">Abstract</h2>
+            <div className="bg-surface-muted rounded-lg p-4 md:p-6">
+              <p className="text-sm md:text-base text-muted leading-relaxed">
                 {post.frontmatter.description}
               </p>
             </div>
@@ -98,12 +98,12 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
          post.frontmatter.publications.length > 0 && 
          post.frontmatter.publications.some(pub => pub.title && pub.title.trim() !== '') && (
           <section id="publications" className="mb-6 md:mb-8">
-            <h2 className="text-xl font-normal text-gray-900 mb-3 md:mb-4">Publications</h2>
+            <h2 className="text-xl font-normal text-primary mb-3 md:mb-4">Publications</h2>
             <div className="space-y-2 md:space-y-3">
               {post.frontmatter.publications
                 .filter(pub => pub.title && pub.title.trim() !== '')
                 .map((pub, index) => (
-                <div key={index} className="bg-white border border-gray-200 rounded-lg p-3 md:p-4 shadow-sm hover:bg-gray-50 transition-colors duration-200">
+                <div key={index} className="bg-surface border border-default rounded-lg p-3 md:p-4 shadow-sm hover:bg-surface-subtle transition-colors duration-200">
                   {pub.doi ? (
                     <a
                       href={pub.doi.startsWith('http') ? pub.doi : `https://doi.org/${pub.doi}`}
@@ -111,17 +111,17 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
                       rel="noopener noreferrer"
                       className="block"
                     >
-                      <h3 className="text-sm md:text-base font-normal text-gray-900 mb-1 hover:text-blue-600 transition-colors duration-200 cursor-pointer">
+                      <h3 className="text-sm md:text-base font-normal text-primary mb-1 hover:text-accent transition-colors duration-200 cursor-pointer">
                         {pub.title}
                       </h3>
                     </a>
                   ) : (
-                    <h3 className="text-sm md:text-base font-normal text-gray-900 mb-1">
+                    <h3 className="text-sm md:text-base font-normal text-primary mb-1">
                       {pub.title}
                     </h3>
                   )}
-                  <p className="text-gray-600 text-xs mb-1">{pub.authors}</p>
-                  <p className="text-gray-500 text-xs mb-2">{pub.venue}</p>
+                  <p className="text-muted text-xs mb-1">{pub.authors}</p>
+                  <p className="text-muted-subtle text-xs mb-2">{pub.venue}</p>
                   
                   {/* PDF/Code/Video 버튼들 */}
                   <div className="flex space-x-2">
@@ -160,23 +160,23 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
          post.frontmatter.articles.length > 0 && 
          post.frontmatter.articles.some(article => article.title && article.title.trim() !== '') && (
           <section className="mb-6 md:mb-8">
-            <h2 className="text-xl md:text-2xl font-normal text-gray-900 mb-3 md:mb-4">Articles</h2>
+            <h2 className="text-xl md:text-2xl font-normal text-primary mb-3 md:mb-4">Articles</h2>
             <div className="space-y-2 md:space-y-3">
               {post.frontmatter.articles
                 .filter(article => article.title && article.title.trim() !== '')
                 .map((article, index) => (
-                <div key={index} className="bg-white border border-gray-200 rounded-lg p-3 md:p-4 shadow-sm hover:bg-gray-50 transition-colors duration-200">
+                <div key={index} className="bg-surface border border-default rounded-lg p-3 md:p-4 shadow-sm hover:bg-surface-subtle transition-colors duration-200">
                   <a
                     href={article.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block"
                   >
-                    <h3 className="text-base md:text-lg font-normal text-gray-900 mb-1 hover:text-blue-600 transition-colors duration-200 cursor-pointer">
+                    <h3 className="text-base md:text-lg font-normal text-primary mb-1 hover:text-accent transition-colors duration-200 cursor-pointer">
                       {article.title}
                     </h3>
                   </a>
-                  <p className="text-gray-600 text-xs md:text-sm mb-1">{article.source} • {article.date}</p>
+                  <p className="text-muted text-xs md:text-sm mb-1">{article.source} • {article.date}</p>
                   
                   {/* Article Link 버튼 */}
                   <div className="flex space-x-2">
@@ -201,12 +201,12 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
          post.frontmatter.datasets.length > 0 && 
          post.frontmatter.datasets.some(dataset => dataset.title && dataset.title.trim() !== '') && (
           <section id="datasets" className="mb-6 md:mb-8">
-            <h2 className="text-xl md:text-2xl font-normal text-gray-900 mb-3 md:mb-4">Datasets</h2>
+            <h2 className="text-xl md:text-2xl font-normal text-primary mb-3 md:mb-4">Datasets</h2>
             <div className="space-y-2 md:space-y-3">
               {post.frontmatter.datasets
                 .filter(dataset => dataset.title && dataset.title.trim() !== '')
                 .map((dataset, index) => (
-                <div key={index} className="bg-white border border-gray-200 rounded-lg p-3 md:p-4 shadow-sm hover:bg-gray-50 transition-colors duration-200">
+                <div key={index} className="bg-surface border border-default rounded-lg p-3 md:p-4 shadow-sm hover:bg-surface-subtle transition-colors duration-200">
                   {dataset.zenodo ? (
                     <a
                       href={dataset.zenodo}
@@ -214,12 +214,12 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
                       rel="noopener noreferrer"
                       className="block"
                     >
-                      <h3 className="text-base md:text-lg font-normal text-gray-900 mb-2 hover:text-blue-600 transition-colors duration-200">
+                      <h3 className="text-base md:text-lg font-normal text-primary mb-2 hover:text-accent transition-colors duration-200">
                         {dataset.title}
                       </h3>
                     </a>
                   ) : (
-                    <h3 className="text-base md:text-lg font-normal text-gray-900 mb-2">
+                    <h3 className="text-base md:text-lg font-normal text-primary mb-2">
                       {dataset.title}
                     </h3>
                   )}
@@ -236,12 +236,12 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
          post.frontmatter.sourcecode.length > 0 && 
          post.frontmatter.sourcecode.some(code => code.title && code.title.trim() !== '') && (
           <section id="sourcecode" className="mb-6 md:mb-8">
-            <h2 className="text-xl font-normal text-gray-900 mb-3 md:mb-4">Source Code</h2>
+            <h2 className="text-xl font-normal text-primary mb-3 md:mb-4">Source Code</h2>
             <div className="space-y-2 md:space-y-3">
               {post.frontmatter.sourcecode
                 .filter(code => code.title && code.title.trim() !== '')
                 .map((code, index) => (
-                <div key={index} className="bg-white border border-gray-200 rounded-lg p-3 md:p-4 shadow-sm hover:bg-gray-50 transition-colors duration-200">
+                <div key={index} className="bg-surface border border-default rounded-lg p-3 md:p-4 shadow-sm hover:bg-surface-subtle transition-colors duration-200">
                   {code.github ? (
                     <a
                       href={code.github}
@@ -249,12 +249,12 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
                       rel="noopener noreferrer"
                       className="block"
                     >
-                      <h3 className="text-base md:text-lg font-normal text-gray-900 mb-2 hover:text-blue-600 transition-colors duration-200">
+                      <h3 className="text-base md:text-lg font-normal text-primary mb-2 hover:text-accent transition-colors duration-200">
                         {code.title}
                       </h3>
                     </a>
                   ) : (
-                    <h3 className="text-base md:text-lg font-normal text-gray-900 mb-2">
+                    <h3 className="text-base md:text-lg font-normal text-primary mb-2">
                       {code.title}
                     </h3>
                   )}
@@ -267,7 +267,7 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
         {/* People 섹션 */}
         {post.frontmatter.people && post.frontmatter.people.length > 0 && (
           <section id="people" className="mb-8 md:mb-12">
-            <h2 className="text-xl font-normal text-gray-900 mb-4 md:mb-6">People</h2>
+            <h2 className="text-xl font-normal text-primary mb-4 md:mb-6">People</h2>
             <div className="flex justify-center">
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 max-w-6xl">
                 {post.frontmatter.people.map((person, index) => {
@@ -295,7 +295,7 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
                   
                   return (
                     <div key={index} className="text-center">
-                      <div className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 mx-auto mb-3 rounded-full overflow-hidden border-2 border-gray-200 bg-gray-100">
+                      <div className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 mx-auto mb-3 rounded-full overflow-hidden border-2 border-default bg-surface-subtle">
                         {imagePath ? (
                           <img
                             src={imagePath}
@@ -307,22 +307,22 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
                             }}
                           />
                         ) : null}
-                        <div className={`w-full h-full bg-gray-300 flex items-center justify-center ${imagePath ? 'hidden' : 'flex'}`}>
-                          <span className="text-gray-600 text-lg md:text-xl font-bold">
+                        <div className={`w-full h-full bg-surface-subtle flex items-center justify-center ${imagePath ? 'hidden' : 'flex'}`}>
+                          <span className="text-muted text-lg md:text-xl font-bold">
                             {person.name.charAt(0)}
                           </span>
                         </div>
                       </div>
-                      <h3 className="font-normal text-gray-900 mb-1 text-xs md:text-sm">
+                      <h3 className="font-normal text-primary mb-1 text-xs md:text-sm">
                         {person.name}
                       </h3>
-                      <p className="text-gray-600 text-xs mb-2">{person.affiliation}</p>
+                      <p className="text-muted text-xs mb-2">{person.affiliation}</p>
                       {person.homepage && (
                         <a
                           href={person.homepage}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors duration-200"
+                          className="inline-flex items-center text-accent hover:text-accent transition-colors duration-200"
                         >
                           <FaHome className="w-2 h-2 md:w-3 md:h-3" />
                         </a>
@@ -348,8 +348,8 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
               overflowY: 'auto'
             }}
           >
-            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-sm">
-              <h4 className="text-sm font-medium text-gray-900 mb-3 pb-2 border-b border-gray-200">
+            <div className="bg-surface/90 backdrop-blur-sm rounded-lg p-4 shadow-sm border border-default">
+              <h4 className="text-sm font-medium text-primary mb-3 pb-2 border-b border-default">
                 Index
               </h4>
               <nav className="space-y-2">
@@ -358,8 +358,8 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
                     href="#abstract"
                     className={`block text-sm py-1 px-2 rounded transition-colors duration-200 ${
                       activeSection === 'abstract' 
-                        ? 'text-blue-700 font-light' 
-                        : 'text-gray-600 hover:text-blue-600 font-light'
+                        ? 'text-accent font-light' 
+                        : 'text-muted hover:text-accent font-light'
                     }`}
                   >
                     Abstract
@@ -370,8 +370,8 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
                     href="#publications"
                     className={`block text-sm py-1 px-2 rounded transition-colors duration-200 ${
                       activeSection === 'publications' 
-                        ? 'text-blue-700 font-light' 
-                        : 'text-gray-600 hover:text-blue-600 font-light'
+                        ? 'text-accent font-light' 
+                        : 'text-muted hover:text-accent font-light'
                     }`}
                   >
                     Publications
@@ -382,8 +382,8 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
                     href="#datasets"
                     className={`block text-sm py-1 px-2 rounded transition-colors duration-200 ${
                       activeSection === 'datasets' 
-                        ? 'text-blue-700 font-light' 
-                        : 'text-gray-600 hover:text-blue-600 font-light'
+                        ? 'text-accent font-light' 
+                        : 'text-muted hover:text-accent font-light'
                     }`}
                   >
                     Datasets
@@ -394,8 +394,8 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
                     href="#sourcecode"
                     className={`block text-sm py-1 px-2 rounded transition-colors duration-200 whitespace-nowrap ${
                       activeSection === 'sourcecode' 
-                        ? 'text-blue-700 font-light' 
-                        : 'text-gray-600 hover:text-blue-600 font-light'
+                        ? 'text-accent font-light' 
+                        : 'text-muted hover:text-accent font-light'
                     }`}
                   >
                     Source Code
@@ -406,8 +406,8 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
                     href="#people"
                     className={`block text-sm py-1 px-2 rounded transition-colors duration-200 ${
                       activeSection === 'people' 
-                        ? 'text-blue-700 font-light' 
-                        : 'text-gray-600 hover:text-blue-600 font-light'
+                        ? 'text-accent font-light' 
+                        : 'text-muted hover:text-accent font-light'
                     }`}
                   >
                     People
