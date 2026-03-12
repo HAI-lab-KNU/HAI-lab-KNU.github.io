@@ -102,8 +102,20 @@ const Layout = ({ activeLink = "Projects", children }: LayoutProps) => {
               </button>
             </div>
 
-            {/* 1280px 미만: 햄버거만 표시 */}
+            {/* 1280px 미만: 햄버거 옆에 달/해 토글 */}
             <div className="flex xl:hidden items-center gap-1">
+              <button
+                type="button"
+                onClick={toggleDark}
+                className="p-2 rounded-lg text-muted hover:text-primary hover:bg-surface-subtle transition-colors duration-200"
+                aria-label={isDark ? "라이트 모드로 전환" : "다크 모드로 전환"}
+              >
+                {isDark ? (
+                  <HiOutlineSun className="w-6 h-6" />
+                ) : (
+                  <HiOutlineMoon className="w-6 h-6" />
+                )}
+              </button>
               <button
               className="p-2 rounded-lg text-muted hover:bg-surface-subtle hover:text-primary transition-colors duration-200"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -142,16 +154,6 @@ const Layout = ({ activeLink = "Projects", children }: LayoutProps) => {
                   {name}
                 </Link>
               ))}
-              {/* 모바일: 메뉴 안에서 다크모드 토글 */}
-              <button
-                type="button"
-                onClick={() => { toggleDark(); setIsMenuOpen(false); }}
-                className="w-full text-left px-3 md:px-4 py-2 md:py-3 rounded-lg text-base font-light text-muted hover:text-accent hover:bg-surface-subtle transition-colors duration-300 flex items-center gap-2"
-                aria-label={isDark ? "라이트 모드로 전환" : "다크 모드로 전환"}
-              >
-                {isDark ? <HiOutlineSun className="w-5 h-5" /> : <HiOutlineMoon className="w-5 h-5" />}
-                <span>{isDark ? "라이트 모드" : "다크 모드"}</span>
-              </button>
             </div>
           </div>
         </nav>
