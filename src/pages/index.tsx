@@ -5,6 +5,9 @@ import { HiOutlineGlobeAlt, HiOutlineChip } from "react-icons/hi"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
+/** WebGL 번들은 클라이언트에서만 로드 (SSR/정적 HTML에서는 CSS 폴백) */
+const HeroShaderBackground = React.lazy(() => import("../components/HeroShaderBackground"))
+
 interface IndexPageProps {
   data: any
 }
@@ -13,12 +16,22 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
   const posts = data.allMarkdownRemark.nodes.slice(0, 3) // 최신 프로젝트 3개로 되돌림
   const news = data.allNews.nodes.slice(0, 3) // 최신 뉴스 3개
   const members = data.allMembers.nodes // 멤버 정보
-  
+
   return (
     <>
-      {/* Hero Section - 2열 레이아웃으로 텍스트와 워드클라우드 배치 */}
-      <section className="pt-40 pb-8 bg-gradient-to-r from-page-muted via-page-muted to-page w-full">
-        <div className="w-full max-w-7xl mx-auto px-6 md:px-8">
+      {/* Hero Section - 셰이더 그래디언트 배경 + 2열 레이아웃 */}
+      <section className="relative pt-40 pb-8 w-full overflow-hidden">
+        <React.Suspense
+          fallback={
+            <div
+              className="absolute inset-0 -z-10 bg-gradient-to-br from-white via-sky-50 to-slate-50"
+              aria-hidden
+            />
+          }
+        >
+          <HeroShaderBackground />
+        </React.Suspense>
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-8">
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
             <div className="text-center md:text-left">
               <h1 className="text-3xl md:text-5xl font-light text-primary mb-6" id="main-heading">
