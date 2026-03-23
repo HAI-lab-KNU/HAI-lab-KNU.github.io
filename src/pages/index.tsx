@@ -5,6 +5,9 @@ import { HiOutlineGlobeAlt, HiOutlineChip } from "react-icons/hi"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
+/** WebGL 번들은 클라이언트에서만 로드 (SSR/정적 HTML에서는 CSS 폴백) */
+const HeroShaderBackground = React.lazy(() => import("../components/HeroShaderBackground"))
+
 interface IndexPageProps {
   data: any
 }
@@ -13,14 +16,26 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
   const posts = data.allMarkdownRemark.nodes.slice(0, 3) // 최신 프로젝트 3개로 되돌림
   const news = data.allNews.nodes.slice(0, 3) // 최신 뉴스 3개
   const members = data.allMembers.nodes // 멤버 정보
-  
+
   return (
     <>
-      {/* Hero Section - 2열 레이아웃으로 텍스트와 워드클라우드 배치 */}
-      <section className="pt-40 pb-8 bg-gradient-to-r from-page-muted via-page-muted to-page w-full">
-        <div className="w-full max-w-7xl mx-auto px-6 md:px-8">
+      {/* Hero Section - 셰이더 배경 + 텍스트 + 워드클라우드 */}
+      <section className="relative pt-40 pb-8 w-full overflow-hidden">
+        <React.Suspense
+          fallback={
+            <div
+              className="absolute inset-0 -z-10 bg-gradient-to-br from-white via-sky-50 to-slate-50"
+              aria-hidden
+            />
+          }
+        >
+          <HeroShaderBackground />
+        </React.Suspense>
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-8">
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
-            <div className="text-center md:text-left">
+            <div
+              className="text-left rounded-2xl bg-white/85 backdrop-blur-md border border-white/60 shadow-sm px-5 py-6 md:px-7 md:py-8 dark:border-transparent dark:bg-black/12 dark:shadow-none dark:backdrop-blur-2xl"
+            >
               <h1 className="text-3xl md:text-5xl font-light text-primary mb-6" id="main-heading">
                Human-AI Interaction Lab 
               </h1>
@@ -31,7 +46,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
               
               <div className="space-y-4">
                 <h2 className="text-lg font-light text-secondary mb-4">Research Areas</h2>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap justify-start gap-2">
                   <span className="inline-block px-3 py-1 text-xs font-light bg-surface text-primary rounded-full border border-default">
                     Human-Computer Interaction
                   </span>
@@ -44,16 +59,13 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
                 </div>
               </div>
             </div>
-            
-            {/* 오른쪽 워드클라우드 영역 */}
-            <div className="text-center md:text-left">
-              <div className="max-w-sm mx-auto">
-                <img
-                  src="/images/wctransparent.png"
-                  alt="HAI Lab Research Keywords Word Cloud"
-                  className="w-full h-auto"
-                />
-              </div>
+
+            <div className="text-left max-w-sm mx-auto md:mx-0 md:ml-auto">
+              <img
+                src="/images/wctransparent.png"
+                alt="HAI Lab Research Keywords Word Cloud"
+                className="w-full h-auto"
+              />
             </div>
           </div>
         </div>
