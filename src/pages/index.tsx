@@ -19,7 +19,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
 
   return (
     <>
-      {/* Hero Section - 셰이더 배경 + 텍스트 (워드클라우드는 주석 처리) */}
+      {/* Hero Section - 셰이더 배경 + 텍스트 + 워드클라우드 */}
       <section className="relative pt-40 pb-8 w-full overflow-hidden">
         <React.Suspense
           fallback={
@@ -60,20 +60,13 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
               </div>
             </div>
 
-            {/* 워드클라우드 — 임시 숨김 (다시 쓸 때 아래 주석 해제하고 이 빈 열은 제거)
-            <div className="text-left">
-              <div
-                className="max-w-sm mx-auto md:mx-0 md:ml-auto rounded-2xl bg-white/85 backdrop-blur-md border border-white/60 shadow-sm px-4 py-5 md:px-5 md:py-6 dark:border-transparent dark:bg-black/12 dark:shadow-none dark:backdrop-blur-2xl"
-              >
-                <img
-                  src="/images/wctransparent.png"
-                  alt="HAI Lab Research Keywords Word Cloud"
-                  className="w-full h-auto"
-                />
-              </div>
+            <div className="text-left max-w-sm mx-auto md:mx-0 md:ml-auto">
+              <img
+                src="/images/wctransparent.png"
+                alt="HAI Lab Research Keywords Word Cloud"
+                className="w-full h-auto"
+              />
             </div>
-            */}
-            <div className="hidden md:block min-h-[1px]" aria-hidden />
           </div>
         </div>
       </section>
