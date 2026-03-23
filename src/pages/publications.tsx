@@ -89,7 +89,7 @@ const PublicationsPage: React.FC<PageProps<DataProps>> = ({ data }) => {
         const n = parseInt(y, 10)
         return !Number.isNaN(n) && n >= start && n <= end
       })
-      .sort((a, b) => parseInt(a, 10) - parseInt(b, 10))
+      .sort((a, b) => parseInt(b, 10) - parseInt(a, 10))
   }, [publications, startYear, endYear])
 
   // 필터링된 논문 목록
