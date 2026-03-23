@@ -1,5 +1,10 @@
 import * as React from "react"
-import { ShaderGradientCanvas, ShaderGradient, presets } from "@shadergradient/react"
+import {
+  ShaderGradientCanvas,
+  ShaderGradient,
+  presets,
+  type GradientT,
+} from "@shadergradient/react"
 
 function useDocumentDark(): boolean {
   const [dark, setDark] = React.useState(false)
@@ -27,21 +32,25 @@ const HeroShaderBackground: React.FC = () => {
     setMounted(true)
   }, [])
 
-  const gradientProps = React.useMemo(() => {
+  const gradientProps = React.useMemo((): GradientT => {
     const base = presets.nightyNight.props
+    /** 프리셋보다 살짝 느리게 (기본 uSpeed ~0.3) */
+    const slow = { uSpeed: 0.16 }
     if (dark) {
       return {
         ...base,
+        ...slow,
         brightness: 0.95,
-      }
+      } as GradientT
     }
     return {
       ...base,
+      ...slow,
       color1: "#e2e8f0",
       color2: "#f1f5f9",
       color3: "#dbeafe",
       brightness: 1.1,
-    }
+    } as GradientT
   }, [dark])
 
   if (!mounted) {

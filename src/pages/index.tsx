@@ -19,7 +19,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
 
   return (
     <>
-      {/* Hero Section - 셰이더 그래디언트 배경 + 2열 레이아웃 */}
+      {/* Hero Section - 셰이더 배경 + 텍스트 (워드클라우드는 주석 처리) */}
       <section className="relative pt-40 pb-8 w-full overflow-hidden">
         <React.Suspense
           fallback={
@@ -33,7 +33,9 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
         </React.Suspense>
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-8">
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
-            <div className="text-center md:text-left">
+            <div
+              className="text-left rounded-2xl bg-white/85 backdrop-blur-md border border-white/60 shadow-sm px-5 py-6 md:px-7 md:py-8 dark:border-transparent dark:bg-black/12 dark:shadow-none dark:backdrop-blur-2xl"
+            >
               <h1 className="text-3xl md:text-5xl font-light text-primary mb-6" id="main-heading">
                Human-AI Interaction Lab 
               </h1>
@@ -44,7 +46,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
               
               <div className="space-y-4">
                 <h2 className="text-lg font-light text-secondary mb-4">Research Areas</h2>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap justify-start gap-2">
                   <span className="inline-block px-3 py-1 text-xs font-light bg-surface text-primary rounded-full border border-default">
                     Human-Computer Interaction
                   </span>
@@ -57,10 +59,12 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
                 </div>
               </div>
             </div>
-            
-            {/* 오른쪽 워드클라우드 영역 */}
-            <div className="text-center md:text-left">
-              <div className="max-w-sm mx-auto">
+
+            {/* 워드클라우드 — 임시 숨김 (다시 쓸 때 아래 주석 해제하고 이 빈 열은 제거)
+            <div className="text-left">
+              <div
+                className="max-w-sm mx-auto md:mx-0 md:ml-auto rounded-2xl bg-white/85 backdrop-blur-md border border-white/60 shadow-sm px-4 py-5 md:px-5 md:py-6 dark:border-transparent dark:bg-black/12 dark:shadow-none dark:backdrop-blur-2xl"
+              >
                 <img
                   src="/images/wctransparent.png"
                   alt="HAI Lab Research Keywords Word Cloud"
@@ -68,6 +72,8 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
                 />
               </div>
             </div>
+            */}
+            <div className="hidden md:block min-h-[1px]" aria-hidden />
           </div>
         </div>
       </section>
