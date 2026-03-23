@@ -19,7 +19,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
 
   return (
     <>
-      {/* Hero Section - 셰이더 배경 + 텍스트 + 워드클라우드 */}
+      {/* Hero Section - 셰이더 배경 + 텍스트 (+ 워드클라우드 주석 처리) */}
       <section className="relative pt-40 pb-8 w-full overflow-hidden">
         <React.Suspense
           fallback={
@@ -32,7 +32,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
           <HeroShaderBackground />
         </React.Suspense>
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-8">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
+          <div className="grid md:grid-cols-1 gap-8 md:gap-16 items-center max-w-3xl">
             <div
               className="text-left rounded-2xl bg-white/85 backdrop-blur-md border border-white/60 shadow-sm px-5 py-6 md:px-7 md:py-8 dark:border-transparent dark:bg-black/12 dark:shadow-none dark:backdrop-blur-2xl"
             >
@@ -60,6 +60,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
               </div>
             </div>
 
+            {/* 워드클라우드 — 다시 켤 때 md:grid-cols-2 + 아래 블록 복구
             <div className="text-left max-w-sm mx-auto md:mx-0 md:ml-auto">
               <img
                 src="/images/wctransparent.png"
@@ -67,6 +68,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
                 className="w-full h-auto"
               />
             </div>
+            */}
           </div>
         </div>
       </section>
