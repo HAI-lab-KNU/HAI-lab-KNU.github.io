@@ -34,7 +34,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-8">
           <div className="grid md:grid-cols-1 gap-8 md:gap-16 items-center max-w-3xl">
             <div
-              className="text-left rounded-2xl bg-white/85 backdrop-blur-md border border-white/60 shadow-sm px-5 py-6 md:px-7 md:py-8 dark:border-transparent dark:bg-black/12 dark:shadow-none dark:backdrop-blur-2xl"
+              className="text-left px-5 py-6 md:px-7 md:py-8"
             >
               <h1 className="text-3xl md:text-5xl font-light text-primary mb-6" id="main-heading">
                Human-AI Interaction Lab 
