@@ -6,6 +6,7 @@ import { SiJupyter } from "react-icons/si"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import StickyIndex, { StickyIndexItem } from "../components/StickyIndex"
 
 interface BlogPostTemplateProps {
   data: {
@@ -23,6 +24,16 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
 }) => {
   const siteTitle = site.siteMetadata?.title || `Title`
   const [activeSection, setActiveSection] = useState('abstract')
+
+  const indexItems = React.useMemo<StickyIndexItem[]>(() => {
+    const items: StickyIndexItem[] = []
+    if (post.frontmatter.description) items.push({ id: 'abstract', label: 'Abstract' })
+    if (post.frontmatter.publications?.some(p => p.title?.trim())) items.push({ id: 'publications', label: 'Publications' })
+    if (post.frontmatter.datasets?.some(d => d.title?.trim())) items.push({ id: 'datasets', label: 'Datasets' })
+    if (post.frontmatter.sourcecode?.some(c => c.title?.trim())) items.push({ id: 'sourcecode', label: 'Source Code' })
+    if (post.frontmatter.people?.length) items.push({ id: 'people', label: 'People' })
+    return items
+  }, [post.frontmatter])
 
   // 현재 보이는 섹션을 추적하는 함수
   useEffect(() => {
@@ -337,86 +348,7 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
 
         </article>
 
-        {/* 오른쪽 스티키 인덱스 */}
-        <div className="hidden lg:block w-32 ml-2 flex-shrink-0" style={{ position: 'relative', minHeight: '100vh' }}>
-          <div 
-            className="sticky-index sticky space-y-3 z-30" 
-            style={{ 
-              position: 'sticky', 
-              top: '16rem',
-              maxHeight: 'calc(100vh - 8rem)',
-              overflowY: 'auto'
-            }}
-          >
-            <div className="bg-surface/90 backdrop-blur-sm rounded-lg p-4 shadow-sm border border-default">
-              <h4 className="text-sm font-medium text-primary mb-3 pb-2 border-b border-default">
-                Index
-              </h4>
-              <nav className="space-y-2">
-                {post.frontmatter.description && (
-                  <a
-                    href="#abstract"
-                    className={`block text-sm py-1 px-2 rounded transition-colors duration-200 ${
-                      activeSection === 'abstract' 
-                        ? 'text-accent font-light' 
-                        : 'text-muted hover:text-accent font-light'
-                    }`}
-                  >
-                    Abstract
-                  </a>
-                )}
-                {post.frontmatter.publications && post.frontmatter.publications.length > 0 && (
-                  <a
-                    href="#publications"
-                    className={`block text-sm py-1 px-2 rounded transition-colors duration-200 ${
-                      activeSection === 'publications' 
-                        ? 'text-accent font-light' 
-                        : 'text-muted hover:text-accent font-light'
-                    }`}
-                  >
-                    Publications
-                  </a>
-                )}
-                {post.frontmatter.datasets && post.frontmatter.datasets.length > 0 && (
-                  <a
-                    href="#datasets"
-                    className={`block text-sm py-1 px-2 rounded transition-colors duration-200 ${
-                      activeSection === 'datasets' 
-                        ? 'text-accent font-light' 
-                        : 'text-muted hover:text-accent font-light'
-                    }`}
-                  >
-                    Datasets
-                  </a>
-                )}
-                {post.frontmatter.sourcecode && post.frontmatter.sourcecode.length > 0 && (
-                  <a
-                    href="#sourcecode"
-                    className={`block text-sm py-1 px-2 rounded transition-colors duration-200 whitespace-nowrap ${
-                      activeSection === 'sourcecode' 
-                        ? 'text-accent font-light' 
-                        : 'text-muted hover:text-accent font-light'
-                    }`}
-                  >
-                    Source Code
-                  </a>
-                )}
-                {post.frontmatter.people && post.frontmatter.people.length > 0 && (
-                  <a
-                    href="#people"
-                    className={`block text-sm py-1 px-2 rounded transition-colors duration-200 ${
-                      activeSection === 'people' 
-                        ? 'text-accent font-light' 
-                        : 'text-muted hover:text-accent font-light'
-                    }`}
-                  >
-                    People
-                  </a>
-                )}
-              </nav>
-            </div>
-          </div>
-        </div>
+        <StickyIndex items={indexItems} activeId={activeSection} top="8rem" />
         </div>
       </div>
     </Layout>

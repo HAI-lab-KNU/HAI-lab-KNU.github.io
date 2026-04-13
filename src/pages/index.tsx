@@ -5,8 +5,7 @@ import { HiOutlineGlobeAlt, HiOutlineChip } from "react-icons/hi"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
-/** WebGL 번들은 클라이언트에서만 로드 (SSR/정적 HTML에서는 CSS 폴백) */
-const HeroShaderBackground = React.lazy(() => import("../components/HeroShaderBackground"))
+import HeroShaderBackground from "../components/HeroShaderBackground"
 
 interface IndexPageProps {
   data: any
@@ -21,16 +20,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
     <>
       {/* Hero Section - 셰이더 배경 + 텍스트 (+ 워드클라우드 주석 처리) */}
       <section className="relative pt-40 pb-8 w-full overflow-hidden">
-        <React.Suspense
-          fallback={
-            <div
-              className="absolute inset-0 -z-10 bg-gradient-to-br from-white via-sky-50 to-slate-50"
-              aria-hidden
-            />
-          }
-        >
-          <HeroShaderBackground />
-        </React.Suspense>
+        <HeroShaderBackground />
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-8">
           <div className="grid md:grid-cols-1 gap-8 md:gap-16 items-center max-w-3xl">
             <div
@@ -87,9 +77,9 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
                 <div className="grid md:grid-cols-3 gap-4 md:gap-8">
                   {posts.map((post) => {
                     return (
-                      <Link 
-                        to={post.fields.slug} 
-                        key={post.id} 
+                      <Link
+                        to={post.fields.slug}
+                        key={post.id}
                         className="block bg-surface rounded-lg p-3 md:p-4 shadow-sm hover:shadow-lg border border-default hover:border-default transition-all duration-300 cursor-pointer"
                       >
                         {/* 썸네일 - 흰 배경으로 통일 */}
@@ -128,52 +118,6 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
                           )}
                         </div>
                         
-                        {/* 참여자 정보 */}
-                        {post.frontmatter.people && post.frontmatter.people.length > 0 && (
-                          <div className="mt-3 pt-3 border-t border-border-muted">
-                            <div className="flex items-center justify-center">
-                              <div className="flex -space-x-1">
-                                {post.frontmatter.people.slice(0, 4).map((person, index) => {
-                                  // 멤버 정보에서 해당 참여자 찾기
-                                  const member = members.find(m => 
-                                    m.frontmatter.name.toLowerCase() === person.name.toLowerCase()
-                                  )
-                                  
-                                  // 멤버 정보가 있으면 멤버의 photo 사용, 없으면 기존 photo 사용
-                                  const imagePath = member?.frontmatter.photo 
-                                    ? `/images/members/${member.frontmatter.photo}`
-                                    : person.photo || "/images/profile-pic.png"
-                                  
-                                  return (
-                                    <div key={index} className="relative group">
-                                      <img
-                                        src={imagePath}
-                                        alt={person.name}
-                                        className="w-6 h-6 rounded-full border border-white object-cover shadow-sm transition-transform duration-200"
-                                        title={person.name}
-                                        onError={(e) => {
-                                          (e.target as HTMLImageElement).src = "/images/profile-pic.png"
-                                        }}
-                                      />
-                                      {/* 툴팁 */}
-                                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 bg-surface text-primary text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
-                                        {person.name}
-                                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-2 border-r-2 border-t-2 border-transparent border-t-surface"></div>
-                                      </div>
-                                    </div>
-                                  )
-                                })}
-                                {post.frontmatter.people.length > 4 && (
-                                  <div className="w-6 h-6 rounded-full bg-surface-subtle border border-default flex items-center justify-center shadow-sm">
-                                    <span className="text-xs text-primary font-medium">
-                                      +{post.frontmatter.people.length - 4}
-                                    </span>
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                        )}
                       </Link>
                     )
                   })}

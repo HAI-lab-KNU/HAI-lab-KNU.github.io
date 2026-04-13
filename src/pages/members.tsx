@@ -2,6 +2,7 @@ import * as React from "react"
 import { useState, useEffect } from "react"
 import { graphql, PageProps } from "gatsby"
 import Layout from "../components/layout"
+import StickyIndex, { StickyIndexItem } from "../components/StickyIndex"
 import { MdEmail } from "react-icons/md"
 import { SiGooglescholar } from "react-icons/si"
 import { FaHome } from "react-icons/fa"
@@ -94,6 +95,11 @@ const MembersPage: React.FC<PageProps<DataProps>> = ({ data }) => {
     return orderA - orderB
   })
 
+  const indexItems: StickyIndexItem[] = sortedPositions.map((position) => ({
+    id: position.toLowerCase().replace(/\s+/g, '-'),
+    label: position === 'Professor' ? 'Director' : position,
+  }))
+
   // Graduate Student 그룹 내에서 박사생을 먼저 정렬
   Object.keys(groupedMembers).forEach(groupKey => {
     if (groupKey === 'Graduate Student') {
@@ -113,7 +119,7 @@ const MembersPage: React.FC<PageProps<DataProps>> = ({ data }) => {
         {sortedPositions.map((position, index) => (
           <div key={position} id={position.toLowerCase().replace(/\s+/g, '-')}>
             {index > 0 && (
-              <div className="my-8"></div>
+              <hr className="border-t border-default my-8" />
             )}
             <div className="space-y-6">
               <h2 id={position.toLowerCase().replace(/\s+/g, '-')} className="text-base md:text-xl font-normal text-primary font-sans tracking-wide text-left">
@@ -231,37 +237,7 @@ const MembersPage: React.FC<PageProps<DataProps>> = ({ data }) => {
         ))}
         </div>
 
-        {/* 오른쪽 스티키 인덱스 */}
-        <div className="hidden lg:block w-32 ml-2 flex-shrink-0" style={{ position: 'relative', minHeight: '200vh' }}>
-          <div 
-            className="sticky-index sticky space-y-3 z-30" 
-            style={{ 
-              position: 'sticky', 
-              top: '16rem'
-            }}
-          >
-            <div className="bg-surface/90 backdrop-blur-sm rounded-lg p-4">
-              <h4 className="text-sm font-medium text-primary mb-3 pb-2">
-                Index
-              </h4>
-              <nav className="space-y-2">
-                {sortedPositions.map((position) => (
-                  <a
-                    key={position}
-                    href={`#${position.toLowerCase().replace(/\s+/g, '-')}`}
-                    className={`block text-sm py-1 px-2 rounded transition-colors duration-200 whitespace-nowrap ${
-                      activeSection === position.toLowerCase().replace(/\s+/g, '-') 
-                        ? 'text-accent font-light' 
-                        : 'text-muted hover:text-accent font-light'
-                    }`}
-                  >
-                    {position === 'Professor' ? 'Director' : position}
-                  </a>
-                ))}
-              </nav>
-            </div>
-          </div>
-        </div>
+        <StickyIndex items={indexItems} activeId={activeSection} top="8rem" />
       </div>
     </Layout>
   )
