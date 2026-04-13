@@ -26,6 +26,18 @@ const MENU = {
 const Layout = ({ activeLink = "Projects", children }: LayoutProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const el = document.documentElement;
+      const scrolled = el.scrollTop || document.body.scrollTop;
+      const total = el.scrollHeight - el.clientHeight;
+      setScrollProgress(total > 0 ? (scrolled / total) * 100 : 0);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     initFlowbite();
@@ -57,7 +69,14 @@ const Layout = ({ activeLink = "Projects", children }: LayoutProps) => {
   return (
     <div className="min-h-screen bg-page transition-colors duration-300">
               {/* Navbar */}
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-page/95 backdrop-blur-sm transition-all duration-300" role="navigation" aria-label="Main navigation">
+        <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-page/95 backdrop-blur-sm border-b border-default/50 transition-all duration-300" role="navigation" aria-label="Main navigation">
+          {/* 스크롤 프로그레스 바 */}
+          <div className="absolute top-0 left-0 right-0 h-0.5 bg-transparent">
+            <div
+              className="h-full bg-accent transition-[width] duration-100 ease-out"
+              style={{ width: `${scrollProgress}%` }}
+            />
+          </div>
           <div className="w-full max-w-7xl mx-auto flex justify-between items-center px-4 md:px-12 py-3 md:py-5">
             <Link to="/" className="flex items-center mr-6 md:mr-12 focus:outline-none rounded">
               <img 

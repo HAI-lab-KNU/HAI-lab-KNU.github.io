@@ -155,9 +155,10 @@ const HeroShaderBackground: React.FC = () => {
     const uTime = gl.getUniformLocation(prog, "u_time")
     const uDark = gl.getUniformLocation(prog, "u_dark")
 
+    const dpr = Math.min(devicePixelRatio, 1.5)
     const resize = () => {
-      canvas.width  = canvas.offsetWidth  * devicePixelRatio
-      canvas.height = canvas.offsetHeight * devicePixelRatio
+      canvas.width  = canvas.offsetWidth  * dpr
+      canvas.height = canvas.offsetHeight * dpr
       gl.viewport(0, 0, canvas.width, canvas.height)
     }
     resize()

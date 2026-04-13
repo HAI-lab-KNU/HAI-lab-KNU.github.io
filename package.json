@@ -18,6 +18,8 @@
     "@shadergradient/react": "^2.4.20",
     "@types/three": "^0.183.1",
     "camera-controls": "^3.1.2",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "flowbite": "^3.1.2",
     "flowbite-react": "^0.12.4",
@@ -49,6 +51,7 @@
     "react-dom": "^18.1.0",
     "react-helmet": "^6.1.0",
     "react-icons": "^5.5.0",
+    "tailwind-merge": "^3.5.0",
     "tailwindcss": "^3.3.0",
     "three": "^0.169.0",
     "three-stdlib": "^2.36.1"
