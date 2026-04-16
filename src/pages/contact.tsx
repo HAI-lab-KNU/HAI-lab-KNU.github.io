@@ -181,4 +181,4 @@ const ContactPage = () => {
 
 export default ContactPage
 
-export const Head = () => <Seo title="Contact | HAI LAB" />
+export const Head = () => <Seo title="Contact" />

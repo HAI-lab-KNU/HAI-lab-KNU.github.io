@@ -30,8 +30,9 @@ const LecturesPage: React.FC<PageProps<DataProps>> = ({ data }) => {
   // 사용 가능한 타입들
   const availableTypes = ["Major", "Liberal Arts"]
 
-  // 사용 가능한 연도들 (2020-2025)
-  const availableYears = Array.from({ length: 6 }, (_, i) => (2025 - i).toString())
+  // 사용 가능한 연도들 (2020 ~ 현재)
+  const currentYear = new Date().getFullYear()
+  const availableYears = Array.from({ length: currentYear - 2019 }, (_, i) => (currentYear - i).toString())
 
   // 타입별로 강의 분류
   const getTypeFromMajor = (major: boolean) => {

@@ -117,7 +117,7 @@ const MembersPage: React.FC<PageProps<DataProps>> = ({ data }) => {
         {/* 메인 콘텐츠 */}
         <div className="flex-1 space-y-10">
         {sortedPositions.map((position, index) => (
-          <div key={position} id={position.toLowerCase().replace(/\s+/g, '-')}>
+          <div key={position}>
             {index > 0 && (
               <hr className="border-t border-default my-8" />
             )}
@@ -158,12 +158,7 @@ const MembersPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                     
                     {/* 멤버 이름 */}
                     <h3 className="card-title mb-2">
-                      
-                      {member.frontmatter.name === "Ji Wook Lee" ? "Jiwook Lee" :
-                       member.frontmatter.name === "Min Gyu Han" ? "Mingyu Han" :
-                       member.frontmatter.name === "Min Ji Kim" ? "Minji Kim" :
-                       member.frontmatter.name === "Min Young Kim" ? "Minyoung Kim" :
-                       member.frontmatter.name}
+                      {member.frontmatter.name}
                     </h3>
                     
                     {/* 직급 */}

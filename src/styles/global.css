@@ -183,17 +183,6 @@
   }
 }
 
-/* 스티키 포지셔닝 강화 */
-@layer utilities {
-  .sticky {
-    position: sticky !important;
-  }
-  
-  .sticky[style*="position: sticky"] {
-    position: sticky !important;
-  }
-}
-
 /* 스티키 인덱스 전용 스타일 */
 .sticky-index {
   position: sticky;
@@ -213,39 +202,7 @@
   align-self: flex-start !important;
 }
 
-/* 스티키 포지셔닝 최종 강화 */
-@layer utilities {
-  .sticky {
-    position: sticky !important;
-  }
-  
-  .sticky[style*="position: sticky"] {
-    position: sticky !important;
-  }
-  
-  .self-start {
-    align-self: flex-start !important;
-  }
-}
-
-/* 스크롤 마진 설정 - 인라인 스타일로 대체됨 */
-
-/* 스티키 포지셔닝 강화 */
-@layer utilities {
-  .sticky {
-    position: sticky !important;
-  }
-  
-  .sticky[style*="position: sticky"] {
-    position: sticky !important;
-  }
-  
-  .self-start {
-    align-self: flex-start !important;
-  }
-}
-
-/* 깔끔한 네비게이션 스타일 */
+/* 유틸리티 강화 */
 @layer utilities {
   .sticky {
     position: sticky !important;

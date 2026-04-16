@@ -22,7 +22,6 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
   data: { previous, next, site, markdownRemark: post },
   location,
 }) => {
-  const siteTitle = site.siteMetadata?.title || `Title`
   const [activeSection, setActiveSection] = useState('abstract')
 
   const indexItems = React.useMemo<StickyIndexItem[]>(() => {
@@ -58,14 +57,14 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
   }, [])
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout activeLink="Projects">
       <div className="relative w-full max-w-7xl mx-auto px-3 md:px-8 py-6 md:py-8">
         <div className="flex">
                   {/* 메인 콘텐츠 */}
         <article className="flex-1 w-full">
         {/* 제목 섹션 */}
         <header className="text-center mb-12">
-          <h1 className="text-3xl font-normal text-primary mb-6">
+          <h1 className="page-title mb-6">
             {post.frontmatter.title}
           </h1>
         </header>
