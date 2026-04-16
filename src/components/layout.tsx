@@ -1,6 +1,7 @@
 import * as React from "react";
 import { graphql, useStaticQuery, Link } from "gatsby";
 import { ReactNode, useEffect, useState } from "react";
+import { useLocation } from "@reach/router";
 import { initFlowbite } from "flowbite";
 import { FaGithub } from "react-icons/fa6";
 import { MdOutlineAlternateEmail } from "react-icons/md";
@@ -19,14 +20,26 @@ const MENU = {
   Projects: "/blog",
   Publications: "/publications",
   Lectures: "/lectures",
-  // Contact: "/contact", // Hidden for now
+  Contact: "/contact",
   // News: "/news", // Hidden for now, will be developed later
 };
 
-const Layout = ({ activeLink = "Projects", children }: LayoutProps) => {
+const Layout = ({ activeLink, children }: LayoutProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const location = useLocation();
+
+  // 현재 경로 기반으로 액티브 메뉴 자동 감지
+  // activeLink prop이 명시적으로 전달된 경우 우선 사용
+  const resolvedActiveLink = activeLink ?? (() => {
+    const pathname = location.pathname.replace(/\/$/, "") || "/";
+    const match = Object.entries(MENU).find(([, path]) => {
+      if (path === "/") return pathname === "/";
+      return pathname === path || pathname.startsWith(path + "/");
+    });
+    return match ? match[0] : "";
+  })();
 
   useEffect(() => {
     const onScroll = () => {
@@ -96,12 +109,12 @@ const Layout = ({ activeLink = "Projects", children }: LayoutProps) => {
                   key={name}
                   to={path}
                   className={`px-6 py-3 rounded-lg text-lg font-light focus:outline-none transition-colors duration-300 ${
-                    activeLink.toLowerCase() === name.toLowerCase()
+                    resolvedActiveLink.toLowerCase() === name.toLowerCase()
                       ? "text-accent"
                       : "text-muted hover:text-accent"
                   }`}
                   role="menuitem"
-                  aria-current={activeLink.toLowerCase() === name.toLowerCase() ? "page" : undefined}
+                  aria-current={resolvedActiveLink.toLowerCase() === name.toLowerCase() ? "page" : undefined}
                 >
                   {name}
                 </Link>
@@ -162,13 +175,13 @@ const Layout = ({ activeLink = "Projects", children }: LayoutProps) => {
                   key={name}
                   to={path}
                   className={`block px-3 md:px-4 py-2 md:py-3 rounded-lg text-base font-light transition-colors duration-300 ${
-                    activeLink.toLowerCase() === name.toLowerCase()
+                    resolvedActiveLink.toLowerCase() === name.toLowerCase()
                       ? "text-accent bg-accent-muted"
                       : "text-muted hover:text-accent"
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                   role="menuitem"
-                  aria-current={activeLink.toLowerCase() === name.toLowerCase() ? "page" : undefined}
+                  aria-current={resolvedActiveLink.toLowerCase() === name.toLowerCase() ? "page" : undefined}
                 >
                   {name}
                 </Link>

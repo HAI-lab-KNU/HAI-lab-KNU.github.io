@@ -252,8 +252,8 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
     <Layout activeLink="Admin">
         <div className="max-w-6xl mx-auto px-6 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-primary mb-2">HAI Lab 관리</h1>
-          <p className="text-muted">멤버, 출판물, 강의를 관리할 수 있습니다.</p>
+          <h1 className="page-title mb-2">HAI Lab 관리</h1>
+          <p className="body-text">멤버, 출판물, 강의를 관리할 수 있습니다.</p>
         </div>
 
         {/* 탭 네비게이션 */}
@@ -307,7 +307,7 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
           {activeTab === 'members' && (
             <button
               onClick={() => setShowAddForm(true)}
-              className="bg-accent hover:bg-accent-hover text-white px-4 py-2 rounded-lg font-medium transition-colors"
+              className="btn-primary"
             >
               + 새 멤버 추가
             </button>
@@ -315,7 +315,7 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
           {activeTab === 'publications' && (
             <button
               onClick={() => alert('출판물 추가 기능은 개발 중입니다.')}
-              className="bg-accent hover:bg-accent-hover text-white px-4 py-2 rounded-lg font-medium transition-colors"
+              className="btn-primary"
             >
               + 새 출판물 추가
             </button>
@@ -323,7 +323,7 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
           {activeTab === 'lectures' && (
             <button
               onClick={() => alert('강의 추가 기능은 개발 중입니다.')}
-              className="bg-accent hover:bg-accent-hover text-white px-4 py-2 rounded-lg font-medium transition-colors"
+              className="btn-primary"
             >
               + 새 강의 추가
             </button>
@@ -331,7 +331,7 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
           {activeTab === 'projects' && (
             <button
               onClick={() => alert('프로젝트 추가 기능은 개발 중입니다.')}
-              className="bg-accent hover:bg-accent-hover text-white px-4 py-2 rounded-lg font-medium transition-colors"
+              className="btn-primary"
             >
               + 새 프로젝트 추가
             </button>
@@ -341,7 +341,7 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
         {/* 멤버 추가/수정 폼 */}
         {showAddForm && activeTab === 'members' && (
           <div className="bg-surface border border-default rounded-lg p-6 mb-6">
-            <h2 className="text-xl font-semibold mb-4">
+            <h2 className="card-title mb-4">
               {editingMember ? "멤버 수정" : "새 멤버 추가"}
             </h2>
             
@@ -438,7 +438,7 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
             <div className="mt-6 flex gap-3">
               <button
                 onClick={editingMember ? handleUpdateMember : handleAddMember}
-                className="bg-accent hover:bg-accent-hover text-white px-4 py-2 rounded-lg font-medium transition-colors"
+                className="btn-primary"
               >
                 {editingMember ? "수정" : "추가"}
               </button>
@@ -447,7 +447,7 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                   setShowAddForm(false)
                   setEditingMember(null)
                 }}
-                className="bg-surface-muted hover:bg-surface-subtle text-primary px-4 py-2 rounded-lg font-medium transition-colors"
+                className="btn-secondary"
               >
                 취소
               </button>
@@ -459,7 +459,7 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
         {activeTab === 'members' && (
           <div className="bg-surface border border-default rounded-lg overflow-hidden">
             <div className="px-6 py-4 border-b border-default">
-              <h2 className="text-lg font-semibold">현재 멤버 목록</h2>
+              <h2 className="list-title">현재 멤버 목록</h2>
             </div>
             
             <div className="divide-y divide-default">
@@ -518,7 +518,7 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
         {activeTab === 'publications' && (
           <div className="bg-surface border border-default rounded-lg overflow-hidden">
             <div className="px-6 py-4 border-b border-default">
-              <h2 className="text-lg font-semibold">출판물 목록</h2>
+              <h2 className="list-title">출판물 목록</h2>
             </div>
             
             <div className="divide-y divide-default">
@@ -564,7 +564,7 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
         {activeTab === 'lectures' && (
           <div className="bg-surface border border-default rounded-lg overflow-hidden">
             <div className="px-6 py-4 border-b border-default">
-              <h2 className="text-lg font-semibold">강의 목록</h2>
+              <h2 className="list-title">강의 목록</h2>
             </div>
             
             <div className="divide-y divide-default">
@@ -597,7 +597,7 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
         {activeTab === 'projects' && (
           <div className="bg-surface border border-default rounded-lg overflow-hidden">
             <div className="px-6 py-4 border-b border-default">
-              <h2 className="text-lg font-semibold">프로젝트 목록</h2>
+              <h2 className="list-title">프로젝트 목록</h2>
             </div>
             
             <div className="divide-y divide-default">
@@ -651,7 +651,7 @@ const AdminPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                           {project.tags && project.tags.length > 0 && (
                             <div className="flex flex-wrap gap-1">
                               {project.tags.map((tag, index) => (
-                                <span key={index} className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-accent-muted text-accent">
+                                <span key={index} className="btn-link-tag">
                                   {tag}
                                 </span>
                               ))}

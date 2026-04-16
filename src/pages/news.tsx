@@ -55,13 +55,13 @@ const NewsPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                       
                       {/* 텍스트 내용 - 모바일에서는 아래에, 데스크톱에서는 왼쪽 */}
                       <div className="flex-1 min-w-0 text-center md:text-left">
-                        <h2 className="text-lg md:text-xl font-semibold text-primary group-hover:text-accent transition-all duration-300 mb-3 group-hover:translate-x-1">
+                        <h2 className="card-title group-hover:text-accent transition-all duration-300 mb-3 group-hover:translate-x-1">
                           {item.frontmatter.title}
                         </h2>
-                        <p className="text-sm text-muted-subtle mb-3 group-hover:text-muted transition-colors duration-300">
+                        <p className="label-text text-muted-subtle mb-3 group-hover:text-muted transition-colors duration-300">
                           {item.frontmatter.date}
                         </p>
-                        <p className="text-sm md:text-base text-muted leading-relaxed group-hover:text-secondary transition-colors duration-300">
+                        <p className="body-text group-hover:text-secondary transition-colors duration-300">
                           {item.frontmatter.description || item.excerpt}
                         </p>
                       </div>

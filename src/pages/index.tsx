@@ -26,24 +26,24 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
             <div
               className="text-left px-5 py-6 md:px-7 md:py-8"
             >
-              <h1 className="text-3xl md:text-5xl font-light text-primary mb-6" id="main-heading">
-               Human-AI Interaction Lab 
+              <h1 className="page-title mb-6" id="main-heading">
+               Human-AI Interaction Lab
               </h1>
-              <p className="text-base text-muted leading-relaxed font-light mb-8">
+              <p className="body-text mb-8">
                 We focus on how to design meaningful human interactions with AI systems in everyday life.
                 Our goal is making proactive AI agents that understand user context and behavior to give helpful suggestions, like <em>JARVIS</em> from Iron Man.
               </p>
               
               <div className="space-y-4">
-                <h2 className="text-lg font-light text-secondary mb-4">Research Areas</h2>
+                <h2 className="list-title mb-4">Research Areas</h2>
                 <div className="flex flex-wrap justify-start gap-2">
-                  <span className="inline-block px-3 py-1 text-xs font-light bg-surface text-primary rounded-full border border-default">
+                  <span className="btn-badge font-light">
                     Human-Computer Interaction
                   </span>
-                  <span className="inline-block px-3 py-1 text-xs font-light bg-surface text-primary rounded-full border border-default">
+                  <span className="btn-badge font-light">
                     Ubiquitous Computing
                   </span>
-                  <span className="inline-block px-3 py-1 text-xs font-light bg-surface text-primary rounded-full border border-default">
+                  <span className="btn-badge font-light">
                     Proactive Systems
                   </span>
                 </div>
@@ -68,7 +68,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
         <section className="pt-16 pb-8 bg-page transition-colors duration-300" aria-labelledby="recent-projects-heading">
           <div className="w-full max-w-7xl mx-auto px-6 md:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-light text-primary mb-6" id="recent-projects-heading">
+              <h2 className="section-title mb-6" id="recent-projects-heading">
                 Recent Projects
               </h2>
             </div>
@@ -103,14 +103,14 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
                         
                         {/* 프로젝트 제목과 태그 */}
                         <div className="text-center">
-                          <h3 className="text-base md:text-lg font-bold text-primary mb-2">
+                          <h3 className="card-title mb-2">
                             {post.frontmatter.title}
                           </h3>
                           {/* 프로젝트 태그 표시 */}
                           {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
                             <div className="flex flex-wrap justify-center gap-1">
                               {post.frontmatter.tags.map((tag, index) => (
-                                <span key={index} className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-surface-subtle text-primary">
+                                <span key={index} className="btn-link-tag bg-surface-subtle text-primary hover:bg-surface-muted">
                                   {tag}
                                 </span>
                               ))}
@@ -127,7 +127,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
                 <div className="text-center mt-8">
                   <Link
                     to="/blog"
-                    className="inline-block text-accent hover:text-accent font-medium focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-page rounded px-4 py-2 transition-all duration-200"
+                    className="btn-ghost"
                   >
                     View All Projects
                   </Link>
@@ -216,4 +216,4 @@ export const query = graphql`
   }
 `
 
-export const Head: React.FC = () => <Seo title="HAI LAB" />
+export const Head: React.FC = () => <Seo title="Home" />

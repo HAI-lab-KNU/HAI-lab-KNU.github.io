@@ -107,19 +107,19 @@ const LecturesPage: React.FC<PageProps<DataProps>> = ({ data }) => {
           <div className="space-y-24">
             {sortedLectures.map((lecture) => (
               <div key={lecture.id} className="border-b border-border-muted pb-16">
-                <h2 className="text-base md:text-lg font-normal text-secondary leading-tight mb-2">
+                <h2 className="list-title leading-tight mb-2">
                   {lecture.frontmatter.title}
                 </h2>
-                <p className="text-sm md:text-base font-light text-muted mb-2">
+                <p className="body-text mb-2">
                   {lecture.frontmatter.description || lecture.excerpt}
                 </p>
                 <div className="flex items-start space-x-4">
                   {lecture.frontmatter.major === true && (
-                    <span className="px-3 py-1 rounded-full text-xs font-medium bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300">
+                    <span className="btn-link-tag bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300 hover:bg-orange-200 dark:hover:bg-orange-800/60 hover:text-orange-800">
                       Major
                     </span>
                   )}
-                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-surface-subtle text-muted">
+                  <span className="btn-link-tag bg-surface-subtle text-muted hover:bg-surface hover:text-primary">
                     {lecture.frontmatter.period}
                   </span>
                 </div>
@@ -157,4 +157,4 @@ export const query = graphql`
 
 export default LecturesPage
 
-export const Head = () => <Seo title="HAI LAB" /> 
+export const Head = () => <Seo title="Lectures" />
