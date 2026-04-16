@@ -48,11 +48,7 @@ const YearFilter: React.FC<YearFilterProps> = ({
                 <button
                   key={type}
                   onClick={() => onTypeChange(type)}
-                  className={`px-1 py-0.5 rounded-md font-normal transition-all duration-300 text-xs whitespace-nowrap flex items-center gap-0.5 ${
-                    selectedTypes.includes(type)
-                      ? "bg-surface text-accent border border-blue-400 dark:border-blue-500"
-                      : "bg-surface text-muted border border-default hover:bg-surface-subtle hover:text-accent hover:border-blue-300 dark:hover:border-blue-500"
-                  }`}
+                  className={`whitespace-nowrap ${selectedTypes.includes(type) ? "btn-badge-active" : "btn-badge"}`}
                 >
                   {selectedTypes.includes(type) && (
                     <FaCheck className="w-2 h-2" />

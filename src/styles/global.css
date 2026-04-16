@@ -2,6 +2,104 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ================================================================
+   공통 컴포넌트 클래스 (이슈 #34 버튼 일관성, 이슈 #35 타이포그래피 일관성)
+   ================================================================ */
+@layer components {
+
+  /* ── 버튼 (이슈 #34) ──────────────────────────────────────────
+     btn-primary   : 주요 액션 버튼 (파란 채우기)
+     btn-secondary : 보조 액션 버튼 (회색 채우기)
+     btn-ghost     : 텍스트 전용 링크 버튼
+     btn-badge     : 인라인 뱃지 버튼 (태그 필터 등)
+     btn-link-tag  : PDF / Slide / Video 등 소형 링크 뱃지
+  ─────────────────────────────────────────────────────────────── */
+  .btn-primary {
+    @apply inline-flex items-center justify-center
+           px-4 py-2 rounded-lg
+           bg-accent hover:bg-accent-hover
+           text-white text-sm font-medium
+           transition-colors duration-200;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center
+           px-4 py-2 rounded-lg
+           bg-surface-muted hover:bg-surface-subtle
+           text-primary text-sm font-medium
+           transition-colors duration-200;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center
+           px-4 py-2 rounded
+           text-accent hover:text-accent-hover font-medium
+           focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-page
+           transition-all duration-200;
+  }
+
+  .btn-badge {
+    @apply inline-flex items-center gap-0.5
+           px-2.5 py-1 rounded-full
+           text-xs font-medium
+           border border-default
+           bg-surface text-primary
+           hover:bg-surface-subtle hover:text-accent hover:border-default
+           transition-all duration-300;
+  }
+
+  .btn-badge-active {
+    @apply inline-flex items-center gap-0.5
+           px-2.5 py-1 rounded-full
+           text-xs font-medium
+           border border-blue-300
+           bg-accent-muted text-blue-700
+           dark:text-white dark:border-blue-500
+           shadow-sm
+           transition-all duration-300;
+  }
+
+  .btn-link-tag {
+    @apply inline-flex items-center
+           px-2.5 py-1 rounded-full
+           bg-accent-muted text-accent text-xs font-medium
+           hover:bg-accent hover:text-white
+           transition-colors duration-200;
+  }
+
+  /* ── 타이포그래피 (이슈 #35) ──────────────────────────────────
+     page-title    : 최상위 페이지 제목 (H1)
+     section-title : 섹션 구분 제목 (H2 — 큰 섹션)
+     card-title    : 카드·리스트 아이템 제목 (H2/H3)
+     list-title    : 연도 구분 등 경량 그룹 헤더
+     body-text     : 일반 본문 단락
+     label-text    : 레이블, 날짜 등 보조 텍스트
+  ─────────────────────────────────────────────────────────────── */
+  .page-title {
+    @apply text-3xl md:text-5xl font-light text-primary;
+  }
+
+  .section-title {
+    @apply text-2xl md:text-4xl font-light text-primary;
+  }
+
+  .card-title {
+    @apply text-base md:text-lg font-semibold text-primary;
+  }
+
+  .list-title {
+    @apply text-base md:text-lg font-normal text-secondary;
+  }
+
+  .body-text {
+    @apply text-sm md:text-base font-light text-muted leading-relaxed;
+  }
+
+  .label-text {
+    @apply text-xs font-medium text-muted;
+  }
+}
+
 /* 팔레트: 라이트/다크 전환용 CSS 변수 (PALETTE.md 참고) */
 :root {
   --color-page: #ffffff;
@@ -85,17 +183,6 @@
   }
 }
 
-/* 스티키 포지셔닝 강화 */
-@layer utilities {
-  .sticky {
-    position: sticky !important;
-  }
-  
-  .sticky[style*="position: sticky"] {
-    position: sticky !important;
-  }
-}
-
 /* 스티키 인덱스 전용 스타일 */
 .sticky-index {
   position: sticky;
@@ -115,39 +202,7 @@
   align-self: flex-start !important;
 }
 
-/* 스티키 포지셔닝 최종 강화 */
-@layer utilities {
-  .sticky {
-    position: sticky !important;
-  }
-  
-  .sticky[style*="position: sticky"] {
-    position: sticky !important;
-  }
-  
-  .self-start {
-    align-self: flex-start !important;
-  }
-}
-
-/* 스크롤 마진 설정 - 인라인 스타일로 대체됨 */
-
-/* 스티키 포지셔닝 강화 */
-@layer utilities {
-  .sticky {
-    position: sticky !important;
-  }
-  
-  .sticky[style*="position: sticky"] {
-    position: sticky !important;
-  }
-  
-  .self-start {
-    align-self: flex-start !important;
-  }
-}
-
-/* 깔끔한 네비게이션 스타일 */
+/* 유틸리티 강화 */
 @layer utilities {
   .sticky {
     position: sticky !important;

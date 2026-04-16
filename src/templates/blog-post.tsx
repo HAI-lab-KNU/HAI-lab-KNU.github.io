@@ -22,7 +22,6 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
   data: { previous, next, site, markdownRemark: post },
   location,
 }) => {
-  const siteTitle = site.siteMetadata?.title || `Title`
   const [activeSection, setActiveSection] = useState('abstract')
 
   const indexItems = React.useMemo<StickyIndexItem[]>(() => {
@@ -58,14 +57,14 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
   }, [])
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout activeLink="Projects">
       <div className="relative w-full max-w-7xl mx-auto px-3 md:px-8 py-6 md:py-8">
         <div className="flex">
                   {/* 메인 콘텐츠 */}
         <article className="flex-1 w-full">
         {/* 제목 섹션 */}
         <header className="text-center mb-12">
-          <h1 className="text-3xl font-normal text-primary mb-6">
+          <h1 className="page-title mb-6">
             {post.frontmatter.title}
           </h1>
         </header>
@@ -282,28 +281,9 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
             <div className="flex justify-center">
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 max-w-6xl">
                 {post.frontmatter.people.map((person, index) => {
-                  // 이름을 기반으로 static 폴더의 이미지 경로 생성
-                  const getImagePath = (name) => {
-                    const nameMap = {
-                      'Auk Kim': 'auk-kim.jpeg',
-                      'Dongju Son': 'dongju-son.png',
-                      'Golibjon Sunatlaev': 'golibjon-sunatlaev.png',
-                      'Jiwoo Hwang': 'jiwoo-hwang.jpeg',
-                      'Jiwook Lee': 'jiwook-lee.jpg',
-                      'Jungmin Lee': 'jungmin-lee.png',
-                      'Kyoyoung Choi': 'kyoyoung-choi.jpg',
-                      'Mingyu Han': 'mingyu-han.jpeg',
-                      'Minji Kim': 'minji-kim.jpg',
-                      'Minyoung Kim': 'minyoung-kim.jpg',
-                      'Seongeun Lee': 'seongeun-lee.png',
-                      'Yeongju Mun': 'yeongju-mun.jpg',
-                      'Younghwan Kim': 'younghwan-kim.png'
-                    };
-                    return nameMap[name] ? `/images/members/${nameMap[name]}` : null;
-                  };
-                  
-                  const imagePath = getImagePath(person.name);
-                  
+                  // frontmatter의 photo 필드를 직접 사용
+                  const imagePath = person.photo || null;
+
                   return (
                     <div key={index} className="text-center">
                       <div className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 mx-auto mb-3 rounded-full overflow-hidden border-2 border-default bg-surface-subtle">
