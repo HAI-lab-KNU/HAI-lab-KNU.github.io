@@ -19,7 +19,7 @@ const MENU = {
   Projects: "/blog",
   Publications: "/publications",
   Lectures: "/lectures",
-  // Contact: "/contact", // Hidden for now
+  Contact: "/contact",
   // News: "/news", // Hidden for now, will be developed later
 };
 
