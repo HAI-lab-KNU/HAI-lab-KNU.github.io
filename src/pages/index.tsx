@@ -216,4 +216,4 @@ export const query = graphql`
   }
 `
 
-export const Head: React.FC = () => <Seo title="HAI LAB" />
+export const Head: React.FC = () => <Seo title="Home" />

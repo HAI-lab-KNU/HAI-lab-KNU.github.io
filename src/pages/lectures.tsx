@@ -157,4 +157,4 @@ export const query = graphql`
 
 export default LecturesPage
 
-export const Head = () => <Seo title="HAI LAB" /> 
+export const Head = () => <Seo title="Lectures" />

@@ -33,12 +33,15 @@ const Seo: React.FC<SeoProps> = ({ description = null, title, children = null })
 
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
+  const fullTitle = title && title !== defaultTitle
+    ? `${title} | ${defaultTitle}`
+    : defaultTitle
 
   return (
     <>
-      <title>HAI LAB</title>
+      <title>{fullTitle}</title>
       <meta name="description" content={metaDescription} />
-      <meta property="og:title" content="HAI LAB" />
+      <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={metaDescription} />
       <meta property="og:type" content="website" />
       <meta name="twitter:card" content="summary" />
@@ -46,7 +49,7 @@ const Seo: React.FC<SeoProps> = ({ description = null, title, children = null })
         name="twitter:creator"
         content={site.siteMetadata?.social?.twitter || ``}
       />
-      <meta name="twitter:title" content="HAI LAB" />
+      <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={metaDescription} />
       <meta name="google-site-verification" content="google809d7094b6e3d475" />
       {children}

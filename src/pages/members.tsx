@@ -269,4 +269,4 @@ export const query = graphql`
 
 export default MembersPage
 
-export const Head = () => <Seo title="HAI LAB" />
+export const Head = () => <Seo title="People" />

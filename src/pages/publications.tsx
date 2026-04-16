@@ -288,4 +288,4 @@ export const query = graphql`
 
 export default PublicationsPage
 
-export const Head = () => <Seo title="HAI LAB" /> 
+export const Head = () => <Seo title="Publications" />

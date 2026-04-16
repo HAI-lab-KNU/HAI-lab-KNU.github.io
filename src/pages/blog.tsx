@@ -236,4 +236,4 @@ export const query = graphql`
 
 export default BlogPage
 
-export const Head = () => <Seo title="HAI LAB" /> 
+export const Head = () => <Seo title="Projects" />
