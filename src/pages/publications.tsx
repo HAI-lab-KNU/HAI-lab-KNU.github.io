@@ -157,7 +157,7 @@ const PublicationsPage: React.FC<PageProps<DataProps>> = ({ data }) => {
           <div className="space-y-8">
             {sortedYears.map((year) => (
               <div key={year} id={year} className="space-y-1">
-                <h2 className="text-base md:text-lg font-normal text-secondary border-b border-default pb-1">{year}</h2>
+                <h2 className="list-title border-b border-default pb-1">{year}</h2>
                 <div className="space-y-6">
                   {groupedPublications[year].map((pub) => (
                     <article key={pub.id} className="bg-surface rounded-lg p-3 md:p-6 shadow-sm hover:bg-surface-subtle transition-colors duration-200">
@@ -169,12 +169,12 @@ const PublicationsPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                             rel="noopener noreferrer"
                             className="block"
                           >
-                            <h2 className="text-base md:text-lg font-normal text-primary hover:text-accent transition-colors duration-200 cursor-pointer">
+                            <h2 className="list-title text-primary hover:text-accent transition-colors duration-200 cursor-pointer">
                               {pub.frontmatter.title}
                             </h2>
                           </a>
                         ) : (
-                          <h2 className="text-base md:text-lg font-normal text-primary">
+                          <h2 className="list-title text-primary">
                             {pub.frontmatter.title}
                           </h2>
                         )}
@@ -210,7 +210,7 @@ const PublicationsPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                               href={pub.frontmatter.paper}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center px-2 py-1 bg-accent-muted text-accent text-xs rounded hover:bg-accent-muted transition-colors duration-200"
+                              className="btn-link-tag"
                             >
                               <FaFilePdf className="mr-1 w-3 h-3" />
                               PDF
@@ -221,7 +221,7 @@ const PublicationsPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                               href={pub.frontmatter.slide}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center px-2 py-1 bg-accent-muted text-accent text-xs rounded hover:bg-accent-muted transition-colors duration-200"
+                              className="btn-link-tag"
                             >
                               slide
                             </a>
@@ -231,7 +231,7 @@ const PublicationsPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                               href={pub.frontmatter.video}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center px-2 py-1 bg-accent-muted text-accent text-xs rounded hover:bg-accent-muted transition-colors duration-200"
+                              className="btn-link-tag"
                             >
                               <FaPlay className="mr-1 w-3 h-3" />
                               Video

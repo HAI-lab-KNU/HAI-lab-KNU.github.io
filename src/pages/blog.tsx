@@ -74,7 +74,7 @@ const BlogPage: React.FC<PageProps<DataProps>> = ({ data }) => {
         {/* 태그 필터 */}
         <div className="mb-1 md:mb-4">
           <div className="bg-surface-muted rounded-lg p-1.5 md:p-3">
-            <h3 className="text-xs font-normal text-secondary mb-1 md:mb-3 text-center">Research Area</h3>
+            <h3 className="label-text text-secondary mb-1 md:mb-3 text-center">Research Area</h3>
             
             <div className="flex flex-col gap-2 md:gap-3 justify-center">
               <div className="flex flex-wrap gap-0.5 md:gap-1.5 justify-center">
@@ -82,10 +82,10 @@ const BlogPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                   <button
                     key={tag}
                     onClick={() => handleTagToggle(tag)}
-                    className={`px-1 py-0.5 rounded-full font-normal transition-all duration-300 text-xs whitespace-nowrap flex items-center gap-0.5 flex-shrink-0 ${
+                    className={`whitespace-nowrap flex-shrink-0 ${
                       selectedTags.includes(tag)
-                        ? "bg-accent-muted text-blue-700 dark:text-white dark:border dark:border-blue-500 border border-blue-300 shadow-sm"
-                        : "bg-surface text-primary border border-default hover:bg-surface-subtle hover:text-accent hover:border-default"
+                        ? "btn-badge-active"
+                        : "btn-badge"
                     }`}
                   >
                     {selectedTags.includes(tag) && (
@@ -102,10 +102,10 @@ const BlogPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                   <button
                     key={tag}
                     onClick={() => handleTagToggle(tag)}
-                    className={`px-1 py-0.5 rounded-full font-normal transition-all duration-300 text-xs whitespace-nowrap flex items-center gap-0.5 flex-shrink-0 ${
+                    className={`whitespace-nowrap flex-shrink-0 ${
                       selectedTags.includes(tag)
-                        ? "bg-accent-muted text-blue-700 dark:text-white dark:border dark:border-blue-500 border border-blue-300 shadow-sm"
-                        : "bg-surface text-primary border border-default hover:bg-surface-subtle hover:text-accent hover:border-default"
+                        ? "btn-badge-active"
+                        : "btn-badge"
                     }`}
                   >
                     {selectedTags.includes(tag) && (
@@ -162,7 +162,7 @@ const BlogPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                     
                       {/* 오른쪽: 텍스트 내용 */}
                       <div className="w-full md:w-3/4 pl-4 md:pl-6 pt-4">
-                        <h2 className="text-base md:text-lg font-normal text-secondary group-hover:text-accent transition-all duration-300 leading-tight mb-2">
+                        <h2 className="card-title text-secondary group-hover:text-accent transition-all duration-300 leading-tight mb-2">
                           {post.frontmatter.title}
                         </h2>
                         {/* 프로젝트 참여자 표시 */}
@@ -180,7 +180,7 @@ const BlogPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                         {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
                           <div className="flex flex-wrap gap-0.5">
                             {post.frontmatter.tags.map((tag, index) => (
-                              <span key={index} className="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-normal bg-surface-subtle text-primary border border-transparent">
+                              <span key={index} className="btn-link-tag bg-surface-subtle text-primary hover:bg-surface-muted hover:text-secondary border-transparent">
                                 {tag}
                               </span>
                             ))}

@@ -122,7 +122,7 @@ const MembersPage: React.FC<PageProps<DataProps>> = ({ data }) => {
               <hr className="border-t border-default my-8" />
             )}
             <div className="space-y-6">
-              <h2 id={position.toLowerCase().replace(/\s+/g, '-')} className="text-base md:text-xl font-normal text-primary font-sans tracking-wide text-left">
+              <h2 id={position.toLowerCase().replace(/\s+/g, '-')} className="list-title font-sans tracking-wide text-left">
                 {position === 'Professor' ? 'Director' : position}
               </h2>
               
@@ -157,7 +157,7 @@ const MembersPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                     </div>
                     
                     {/* 멤버 이름 */}
-                    <h3 className="text-sm md:text-lg font-semibold text-primary mb-2">
+                    <h3 className="card-title mb-2">
                       
                       {member.frontmatter.name === "Ji Wook Lee" ? "Jiwook Lee" :
                        member.frontmatter.name === "Min Gyu Han" ? "Mingyu Han" :
@@ -167,7 +167,7 @@ const MembersPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                     </h3>
                     
                     {/* 직급 */}
-                    <p className="text-xs md:text-sm text-accent font-medium mb-3">
+                    <p className="label-text text-accent mb-3">
                       {member.frontmatter.position === 'Alumni' && member.frontmatter.graduation 
                         ? member.frontmatter.graduation 
                         : member.frontmatter.position}
