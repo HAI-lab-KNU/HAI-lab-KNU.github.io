@@ -109,6 +109,8 @@ syllabus: "/files/syllabus.pdf"
 
 ### **Adding Lab Members**
 
+Member frontmatter is the member database schema. See [Content Schema](docs/content-schema.md#members) for required fields, optional fields, allowed `position` values, and ordering rules.
+
 #### 1. Create new file in Members folder
 ```bash
 # Create new file in content/members/
@@ -119,15 +121,23 @@ touch content/members/member-name.md
 ```markdown
 ---
 name: "Name"
-role: "Student"  # Professor, Postdoc, PhD, Master, Undergraduate
-affiliation: "Affiliation"
+position: "M.S Student"  # Professor, Ph.D Student, M.S Student, Undergraduate Student, Alumni
 email: "email@example.com"
-photo: "/images/members/photo.jpg"
+photo: "member-name.jpg"
+date: "2026-08"
 homepage: "https://..."
+googleScholar: "https://scholar.google.com/..."
+linkedin: "https://www.linkedin.com/in/..."
 github: "https://github.com/..."
-research_interests: ["Research Area 1", "Research Area 2"]
+bio: "Short biography"
+research_interests: ["Research Area 1", "Research Area 2", "Research Area 3", "Research Area 4"]
 ---
 ```
+
+- `photo` should be a filename only. Put the image file in `static/images/members/`.
+- `date` is optional and can be used as a start month for ordering, using `YYYY-MM`.
+- Leave optional fields as empty strings if they should not be shown.
+- Alumni can use `graduation`, for example `graduation: "M.S. 2026"`.
 
 ### **Adding News**
 
