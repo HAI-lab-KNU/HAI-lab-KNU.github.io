@@ -5,7 +5,7 @@ import Layout from "../components/layout"
 import StickyIndex, { StickyIndexItem } from "../components/StickyIndex"
 import { MdEmail } from "react-icons/md"
 import { SiGooglescholar } from "react-icons/si"
-import { FaHome } from "react-icons/fa"
+import { FaGithub, FaHome, FaLinkedin } from "react-icons/fa"
 import Seo from "../components/seo"
 
 type DataProps = {
@@ -19,9 +19,13 @@ type DataProps = {
         email: string
         homepage: string
         googleScholar: string
+        linkedin: string
+        github: string
+        bio: string
         graduation: string
         current: string
         photo: string
+        date: string
         research_interests: string[]
       }
     }[]
@@ -106,7 +110,10 @@ const MembersPage: React.FC<PageProps<DataProps>> = ({ data }) => {
       groupedMembers[groupKey].sort((a, b) => {
         if (a.frontmatter.position === 'Ph.D Student' && b.frontmatter.position === 'M.S Student') return -1
         if (a.frontmatter.position === 'M.S Student' && b.frontmatter.position === 'Ph.D Student') return 1
-        return 0
+        const dateA = a.frontmatter.date || ""
+        const dateB = b.frontmatter.date || ""
+        if (dateA !== dateB) return dateA.localeCompare(dateB)
+        return a.frontmatter.name.localeCompare(b.frontmatter.name)
       })
     }
   })
@@ -168,10 +175,10 @@ const MembersPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                         : member.frontmatter.position}
                     </p>
                     
-                    {/* 연구 분야 - 항상 2칸 고정 높이 */}
-                    <div className="text-xs text-muted mb-3 h-6 md:h-8 flex flex-col justify-center">
+                    {/* 연구 분야 */}
+                    <div className="text-xs text-muted mb-3 min-h-12 flex flex-col justify-center">
                       {member.frontmatter.research_interests && member.frontmatter.research_interests.length > 0 ? (
-                        member.frontmatter.research_interests.slice(0, 2).map((interest, index) => (
+                        member.frontmatter.research_interests.slice(0, 4).map((interest, index) => (
                           <div key={index} className="text-center mb-1">
                             {interest}
                           </div>
@@ -223,6 +230,32 @@ const MembersPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                           <SiGooglescholar className="w-3 h-3 text-white" />
                         </a>
                       )}
+
+                      {/* LinkedIn */}
+                      {member.frontmatter.linkedin && (
+                        <a
+                          href={member.frontmatter.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-6 h-6 bg-primary dark:bg-surface-subtle rounded-full flex items-center justify-center hover:bg-accent transition-colors"
+                          title="View LinkedIn profile"
+                        >
+                          <FaLinkedin className="w-3 h-3 text-white" />
+                        </a>
+                      )}
+
+                      {/* GitHub */}
+                      {member.frontmatter.github && (
+                        <a
+                          href={member.frontmatter.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-6 h-6 bg-primary dark:bg-surface-subtle rounded-full flex items-center justify-center hover:bg-accent transition-colors"
+                          title="View GitHub profile"
+                        >
+                          <FaGithub className="w-3 h-3 text-white" />
+                        </a>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -253,8 +286,12 @@ export const query = graphql`
           email
           homepage
           googleScholar
+          linkedin
+          github
+          bio
           graduation
           photo
+          date
           research_interests
         }
       }
