@@ -18,7 +18,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
 
   return (
     <>
-      {/* Hero Section - 셰이더 배경 + 텍스트 (+ 워드클라우드 주석 처리) */}
+      {/* Hero Section - 셰이더 배경 + 텍스트 */}
       <section className="relative pt-40 pb-8 w-full overflow-hidden">
         <HeroShaderBackground />
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-8">
@@ -100,7 +100,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
                             )}
                           </div>
                         </div>
-                        
+
                         {/* 프로젝트 제목과 태그 */}
                         <div className="text-center">
                           <h3 className="card-title mb-2">
@@ -117,12 +117,12 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
                             </div>
                           )}
                         </div>
-                        
+
                       </Link>
                     )
                   })}
                 </div>
-                
+
                 {/* View All 링크를 프로젝트들 아래에 배치 */}
                 <div className="text-center mt-8">
                   <Link

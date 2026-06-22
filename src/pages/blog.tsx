@@ -159,7 +159,7 @@ const BlogPage: React.FC<PageProps<DataProps>> = ({ data }) => {
                         </div>
                       )}
                     </div>
-                    
+
                       {/* 오른쪽: 텍스트 내용 */}
                       <div className="w-full md:w-3/4 pl-4 md:pl-6 pt-4">
                         <h2 className="card-title text-secondary group-hover:text-accent transition-all duration-300 leading-tight mb-2">
