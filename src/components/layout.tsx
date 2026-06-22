@@ -97,7 +97,7 @@ const Layout = ({ activeLink, children }: LayoutProps) => {
                 alt="HAI Lab Logo" 
                 className="h-6 md:h-8 w-auto mr-2"
               />
-              <span className="text-xl md:text-2xl font-light text-primary hover:text-accent transition-colors duration-300 whitespace-nowrap overflow-hidden leading-none">
+              <span className="text-base xl:text-lg font-light text-muted hover:text-accent transition-colors duration-300 whitespace-nowrap overflow-hidden">
                 Human-AI Interaction Lab.
               </span>
             </Link>
