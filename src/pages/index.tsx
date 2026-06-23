@@ -26,16 +26,16 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
             <div
               className="text-left px-5 py-6 md:px-7 md:py-8"
             >
-              <h1 className="page-title mb-6" id="main-heading">
+              <h1 className="page-title mb-6 text-black dark:text-white" id="main-heading">
                Human-AI Interaction Lab
               </h1>
-              <p className="body-text mb-8">
+              <p className="body-text mb-8 text-[#0b1020] dark:text-slate-100">
                 We focus on how to design meaningful human interactions with AI systems in everyday life.
                 Our goal is making proactive AI agents that understand user context and behavior to give helpful suggestions, like <em>JARVIS</em> from Iron Man.
               </p>
               
               <div className="space-y-4">
-                <h2 className="list-title mb-4">Research Areas</h2>
+                <h2 className="list-title mb-4 text-[#0b1020] dark:text-slate-100">Research Areas</h2>
                 <div className="flex flex-wrap justify-start gap-2">
                   <span className="btn-badge font-light">
                     Human-Computer Interaction
