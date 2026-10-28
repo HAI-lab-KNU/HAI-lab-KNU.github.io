@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title description">
+  <title id="title">VibeFactory system overview</title>
+  <desc id="description">Users describe an app through chat and images, a server generates and builds an Android app, and users try the app and mark visual changes for the next revision.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto-start-reverse">
+      <path d="M1 1l5 3-5 3" fill="none" stroke="#648a79" stroke-width="1.5"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="675" rx="24" fill="#f3f6ed"/>
+  <text x="64" y="98" font-family="Georgia,serif" font-size="60" fill="#173f35">VibeFactory</text>
+  <text x="64" y="141" font-family="Arial,sans-serif" font-size="25" fill="#4d6658">Create and refine Android apps through conversation and visual edits.</text>
+  <g font-family="Arial,sans-serif">
+    <rect x="64" y="207" width="320" height="254" rx="16" fill="#fff" stroke="#cddbc9" stroke-width="2"/>
+    <rect x="440" y="207" width="320" height="254" rx="16" fill="#173f35"/>
+    <rect x="816" y="207" width="320" height="254" rx="16" fill="#fff" stroke="#cddbc9" stroke-width="2"/>
+    <path d="M397 334h29M773 334h29" stroke="#648a79" stroke-width="3" marker-end="url(#arrow)"/>
+    <g fill="#173f35">
+      <text x="94" y="252" font-size="18" letter-spacing="2">01 / ANDROID HOST</text>
+      <path d="M101 279h56a7 7 0 0 1 7 7v31a7 7 0 0 1-7 7h-34l-16 12v-12h-6a7 7 0 0 1-7-7v-31a7 7 0 0 1 7-7Z" fill="#e6eee0" stroke="#648a79" stroke-width="2"/>
+      <path d="M108 294h41m-41 13h28" stroke="#648a79" stroke-width="2"/>
+      <text x="94" y="382" font-size="35">Describe</text>
+      <text x="94" y="424" font-size="21" fill="#4d6658">Chat + reference images</text>
+    </g>
+    <g fill="#f3f6ed">
+      <text x="470" y="252" font-size="18" letter-spacing="2">02 / BUILD SERVER</text>
+      <path d="m484 284-16 19 16 19m48-38 16 19-16 19m-22-43-12 48" fill="none" stroke="#c6dfa7" stroke-width="3"/>
+      <text x="470" y="382" font-size="35">Generate</text>
+      <text x="470" y="424" font-size="21" fill="#c9dfd1">Clarify · code · build</text>
+    </g>
+    <g fill="#173f35">
+      <text x="846" y="252" font-size="18" letter-spacing="2">03 / GENERATED APP</text>
+      <rect x="851" y="274" width="37" height="62" rx="6" fill="#e6eee0" stroke="#648a79" stroke-width="2"/>
+      <path d="M860 282h19m-12 46h5m35-40 12 12-12 12m-9-12h20" fill="none" stroke="#648a79" stroke-width="2"/>
+      <text x="846" y="382" font-size="35">Try &amp; refine</text>
+      <text x="846" y="424" font-size="21" fill="#4d6658">Install + mark UI changes</text>
+    </g>
+    <path d="M976 477v32H224v-32" fill="none" stroke="#648a79" stroke-width="2" stroke-dasharray="7 7" marker-end="url(#arrow)"/>
+    <rect x="403" y="493" width="394" height="32" fill="#f3f6ed"/>
+    <text x="600" y="516" text-anchor="middle" font-size="20" fill="#4d6658">Iterate through saved revisions</text>
+    <text x="64" y="606" font-size="21" fill="#4d6658">Visual editing</text>
+    <text x="247" y="608" font-size="29" fill="#b64040">×</text><text x="281" y="606" font-size="21" fill="#173f35">Delete</text>
+    <text x="432" y="608" font-size="29" fill="#275ca0">↗</text><text x="468" y="606" font-size="21" fill="#173f35">Move</text>
+    <text x="608" y="608" font-size="29" fill="#7a4495">✳</text><text x="645" y="606" font-size="21" fill="#173f35">Change</text>
+    <text x="822" y="608" font-size="29" fill="#347240">+</text><text x="858" y="606" font-size="21" fill="#173f35">Add</text>
+    <text x="1136" y="606" text-anchor="end" font-size="16" fill="#4d6658">System overview</text>
+  </g>
+</svg>
