@@ -8,5 +8,9 @@ people:
     affiliation: "Kangwon National University"
     photo: "/images/members/jungmin-lee.png"
     homepage: "https://lsom5064.github.io/"
+  - name: "Auk Kim"
+    affiliation: "Kangwon National University"
+    photo: "/images/members/auk-kim.jpeg"
+    homepage: "https://kimauk.github.io/"
 tags: ["Human-Computer Interaction", "Human-AI Interaction", "End-User Programming", "LLM"]
 ---
